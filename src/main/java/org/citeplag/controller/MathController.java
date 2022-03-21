@@ -15,7 +15,6 @@ import gov.nist.drmf.interpreter.common.pojo.CASResult;
 import gov.nist.drmf.interpreter.common.pojo.SemanticEnhancedAnnotationStatus;
 import gov.nist.drmf.interpreter.generic.GenericLatexSemanticEnhancer;
 import gov.nist.drmf.interpreter.generic.SemanticEnhancedDocumentBuilder;
-import gov.nist.drmf.interpreter.generic.mediawiki.DefiningFormula;
 import gov.nist.drmf.interpreter.generic.mlp.pojo.MOIPresentations;
 import gov.nist.drmf.interpreter.generic.mlp.pojo.SemanticEnhancedDocument;
 import gov.nist.drmf.interpreter.pom.extensions.PrintablePomTaggedExpression;
@@ -213,7 +212,7 @@ public class MathController {
 
         SemanticLatexTranslator translator = cas.getTranslator();
         try {
-            TranslationFeature<PrintablePomTaggedExpression> feature = experimental ? new GenericReplacementTool() : null;
+            TranslationFeature<PrintablePomTaggedExpression> feature = experimental ? null : null;
             TranslationInformation translationInf = translator.translateToObject(latex, label, feature);
             TranslationResponse tr = new TranslationResponse();
             tr.setResult(translationInf.getTranslatedExpression());
@@ -282,15 +281,15 @@ public class MathController {
     )
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Scored Suggestions", response = DefiningFormula[].class),
+                    @ApiResponse(code = 200, message = "Scored Suggestions"),
                     @ApiResponse(code = 500, message = "Unable generate suggestions for given Wikidata QID")
             }
     )
-    public List<DefiningFormula> wikidataSuggestor(
+    public List<String> wikidataSuggestor(
             @RequestParam() String qid
     ) throws MediaWikiApiErrorException, IOException {
         SemanticEnhancedDocumentBuilder builder = SemanticEnhancedDocumentBuilder.getDefaultBuilder();
-        return builder.enhanceWikidataItem(qid);
+        return null;
     }
 
     @PostMapping("/appendTranslationsToDocument")
