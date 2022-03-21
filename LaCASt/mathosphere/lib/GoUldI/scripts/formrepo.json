@@ -1,0 +1,36 @@
+[
+  {
+    "type": "section",
+    "htmlClass": "row btn-row center",
+    "items": [
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          "owner"
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          "repo"
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          "foldername"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "token",
+    "onChange": "disableTokenError()",
+    "validationMessages": {
+      "necessaryToken": "An access token is necessary to push changes to GitHub!"
+    }
+  }
+]

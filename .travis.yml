@@ -1,0 +1,12 @@
+language: java
+jdk:
+  - openjdk11
+
+before_install:
+  - mvn clean -q
+
+install:
+  - mvn install -DskipTests=true -q
+
+after_success:
+  - mvn clean test jacoco:report coveralls:report

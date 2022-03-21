@@ -1,0 +1,76 @@
+{
+  "title": "The Gold Standard",
+  "type": "object",
+  "properties": {
+    "title": {
+      "title": "Formula Name",
+      "type": "string",
+      "default": "unknown"
+    },
+    "type": {
+      "title": "Formula Type",
+      "type": "string",
+      "enum": [
+        "definition",
+        "relation",
+        "equation",
+        "general formula"
+      ]
+    },
+    "math_inputtex": {
+      "title": "Original Input TeX",
+      "type": "string",
+      "default": ""
+    },
+    "math_inputtex_semantic": {
+      "title": "Semantic Input TeX",
+      "type": "string",
+      "default": ""
+    },
+    "correct_tex": {
+      "title": "Corrected TeX",
+      "type": "string",
+      "default": ""
+    },
+    "uri": {
+      "title": "Hyperlink",
+      "type": "string"
+    },
+    "correct_mml": {
+      "title": "MathML",
+      "type": "textarea"
+    },
+    "comment": {
+      "title": "Comment",
+      "type": "textarea"
+    },
+    "qID": {
+      "title": "Gold ID",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 320
+    },
+    "check":{
+      "qid": {
+        "type": "boolean",
+        "title":"Structure",
+        "default": false
+      },
+      "tree": {
+        "type": "boolean",
+        "title":"Elements",
+        "default": false
+      }
+    },
+    "constraints": {
+      "title": "Constraints",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "required": [
+        "constraints[]"
+      ]
+    }
+  }
+}

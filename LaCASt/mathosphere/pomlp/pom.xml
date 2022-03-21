@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.formulasearchengine.mathosphere</groupId>
+        <artifactId>mathosphere-parent</artifactId>
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>pomlp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>POMLP: Part-of-Mathematical Language Processor</name>
+
+    <developers>
+        <developer>
+            <name>Andre Greiner-Petter</name>
+            <email>andre.greiner-petter@uni-konstanz.de</email>
+            <organization>Universitaet Konstanz</organization>
+            <organizationUrl>https://www.uni-konstanz.de/</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--        <maven.compiler.source>1.8</maven.compiler.source>-->
+<!--        <maven.compiler.target>1.8</maven.compiler.target>-->
+<!--        <java.version>1.8</java.version>-->
+        <jackson.version>2.10.3</jackson.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <!--
+                This is needed to that IntelliJ can find, handle and invoke JUnit5
+                test suites.
+            -->
+<!--            <plugin>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.1</version>-->
+<!--                <configuration>-->
+<!--                    <source>${java.version}</source>-->
+<!--                    <target>${java.version}</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.platform</groupId>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <version>1.0.0-M5</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <workingDirectory>${basedir}</workingDirectory>
+                    <systemPropertyVariables>
+                        <!-- Set system variable to prevent java tests to overwrite results -->
+                        <maven.loglevel>INFO</maven.loglevel>
+                    </systemPropertyVariables>
+                    <excludes>
+                        <exclude>**/GoldstandardAutomaticComparisonTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <!-- SnuggleTeX -->
+        <repository>
+            <id>www2.ph.ed.ac.uk-releases</id>
+            <url>https://www2.ph.ed.ac.uk/maven2</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Usually should be avoided... however, maven install-plugin won't work here -->
+        <dependency>
+            <groupId>com.mathtoweb</groupId>
+            <artifactId>MathToWeb</artifactId>
+            <version>4.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/MathToWeb.jar</systemPath>
+        </dependency>
+
+        <!-- Robust Tree Edit Distance algorithm -->
+        <dependency>
+            <groupId>com.formulasearchengine.mathosphere</groupId>
+            <artifactId>lib-RTED</artifactId>
+            <version>3.0.0-SNAPSHOT</version>
+<!--            <version>1.2-SNAPSHOT</version>-->
+        </dependency>
+
+        <!-- MathML Query Handler -->
+        <dependency>
+            <groupId>com.formulasearchengine</groupId>
+            <artifactId>mathmlquerygenerator</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- MathML Converter -->
+        <dependency>
+            <groupId>com.formulasearchengine.mathmltools</groupId>
+            <artifactId>mathml-converters</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+
+        <!-- MathML Core -->
+        <dependency>
+            <groupId>com.formulasearchengine.mathmltools</groupId>
+            <artifactId>mathml-core</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+
+        <!-- Spring REST to communicate with GitHub -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.0.2.RELEASE</version>
+        </dependency>
+
+        <!-- JSON to Java parser -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- Note: core-annotations version x.y.0 is generally compatible with
+                 (identical to) version x.y.1, x.y.2, etc. -->
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- HTML4 Unescape for pre-processing latex input -->
+        <dependency>
+            <groupId>org.unbescape</groupId>
+            <artifactId>unbescape</artifactId>
+            <version>1.1.5.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- Logging via log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!--command line options parser
+            http://jcommander.org/ -->
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.72</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Needed for surefire, otherwise maven cannot find JUnit5 tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+
+        <!--
+               Several 3rd party tools to parse LaTeX to MathML!
+        -->
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-core</artifactId>
+            <version>1.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>uk.ac.ed.ph.snuggletex</groupId>
+            <artifactId>snuggletex-upconversion</artifactId>
+            <version>1.3-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

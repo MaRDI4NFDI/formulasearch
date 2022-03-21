@@ -1,0 +1,12 @@
+<math 
+  xmlns="http://www.w3.org/1998/Math/MathML">
+  <semantics>
+    <merror>
+      <mtext>Parse error on line 1:
+...v,i,w)\in\Gamma_{G^{\prime}}} [c_{i}y^{i
+-----------------------^
+</mtext>
+    </merror>
+    <annotation encoding="TeX">L(\boldsymbol{x},\boldsymbol{y},\boldsymbol{p}) = \sum_{i \in \mathcal{N}} \sum_{v&lt;w:(v,i,w)\in\Gamma_{G^{\prime}}} [c_{i}y^{i}_{vw}+p(v,i,w) (\sum_{t \in T}x^{t}(v,i,w)-y^{i}_{vw}) + p(w,i,v) (\sum_{t\in T}x^{t}(w,i,v)-y^{i}_{wv})]</annotation>
+  </semantics>
+</math>

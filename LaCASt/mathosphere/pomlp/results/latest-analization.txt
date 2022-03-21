@@ -1,0 +1,301 @@
+2018-01-09T13:35:34.710
+Final Analization:
+Converters: [POM, SnuggleTeX, LatexML, Mathematical, MathToWeb, Latex2MML, TeXZilla, Mathoid, Mathematica]
+
+       Total Content Distance: 5176.9440476190475
+  Total Presentation Distance: 4531.833333333335
+     Maximum Content Distance: [POM - 0: 271.0]
+      Lowest Content Distance: [POM - 0: 0.0]
+Maximum Presentation Distance: [TeXZilla - 6: 511.0]
+ Lowest Presentation Distance: [LatexML - 2: 0.0]
+     Average Content Distance: 0.44667334319405066
+Average Presentation Distance: 0.11287537257050823
+        # Content Comparisons: 11590
+   # Presentation Comparisons: 40149
+    # Not Content Comparisons: 0
+#Not Presentation Comparisons: 0
+
+Different Presentation: 
+POM:
+          Total Content Distance: 7119.0
+     Total Presentation Distance: 5849.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 271.0]
+         Lowest Content Distance: [ Idx: 0 / Distance: 0.0]
+   Maximum Presentation Distance: [ Idx: 0 / Distance: 251.0]
+    Lowest Presentation Distance: [ Idx: 0 / Distance: 1.0]
+        Average Content Distance: 25.334519572953738
+   Average Presentation Distance: 20.814946619217082
+           # Content Comparisons: 281
+      # Presentation Comparisons: 281
+       # Not Content Comparisons: 0
+   #Not Presentation Comparisons: 0
+
+SnuggleTeX:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 6525.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 1 / Distance: 171.0]
+    Lowest Presentation Distance: [ Idx: 1 / Distance: 1.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 23.22064056939502
+           # Content Comparisons: 0
+      # Presentation Comparisons: 281
+       # Not Content Comparisons: 281
+   #Not Presentation Comparisons: 0
+
+LatexML:
+          Total Content Distance: 1797.0
+     Total Presentation Distance: 3968.0
+        Maximum Content Distance: [ Idx: 2 / Distance: 165.0]
+         Lowest Content Distance: [ Idx: 2 / Distance: 0.0]
+   Maximum Presentation Distance: [ Idx: 2 / Distance: 278.0]
+    Lowest Presentation Distance: [ Idx: 2 / Distance: 0.0]
+        Average Content Distance: 6.606617647058823
+   Average Presentation Distance: 14.12099644128114
+           # Content Comparisons: 272
+      # Presentation Comparisons: 281
+       # Not Content Comparisons: 9
+   #Not Presentation Comparisons: 0
+
+Mathematical:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 3802.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 3 / Distance: 167.0]
+    Lowest Presentation Distance: [ Idx: 3 / Distance: 0.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 14.186567164179104
+           # Content Comparisons: 0
+      # Presentation Comparisons: 268
+       # Not Content Comparisons: 268
+   #Not Presentation Comparisons: 0
+
+MathToWeb:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 4035.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 4 / Distance: 88.0]
+    Lowest Presentation Distance: [ Idx: 4 / Distance: 0.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 15.400763358778626
+           # Content Comparisons: 0
+      # Presentation Comparisons: 262
+       # Not Content Comparisons: 262
+   #Not Presentation Comparisons: 0
+
+Latex2MML:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 4217.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 5 / Distance: 103.0]
+    Lowest Presentation Distance: [ Idx: 5 / Distance: 1.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 15.794007490636703
+           # Content Comparisons: 0
+      # Presentation Comparisons: 267
+       # Not Content Comparisons: 267
+   #Not Presentation Comparisons: 0
+
+TeXZilla:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 6945.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 6 / Distance: 511.0]
+    Lowest Presentation Distance: [ Idx: 6 / Distance: 0.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 24.715302491103202
+           # Content Comparisons: 0
+      # Presentation Comparisons: 281
+       # Not Content Comparisons: 281
+   #Not Presentation Comparisons: 0
+
+Mathoid:
+          Total Content Distance: 0.0
+     Total Presentation Distance: 1895.0
+        Maximum Content Distance: [ Idx: 0 / Distance: 4.9E-324]
+         Lowest Content Distance: [ Idx: 0 / Distance: 1.7976931348623157E308]
+   Maximum Presentation Distance: [ Idx: 7 / Distance: 82.0]
+    Lowest Presentation Distance: [ Idx: 7 / Distance: 0.0]
+        Average Content Distance: NaN
+   Average Presentation Distance: 7.766393442622951
+           # Content Comparisons: 0
+      # Presentation Comparisons: 244
+       # Not Content Comparisons: 244
+   #Not Presentation Comparisons: 0
+
+Mathematica:
+          Total Content Distance: 2674.0
+     Total Presentation Distance: 2913.0
+        Maximum Content Distance: [ Idx: 8 / Distance: 91.0]
+         Lowest Content Distance: [ Idx: 8 / Distance: 0.0]
+   Maximum Presentation Distance: [ Idx: 8 / Distance: 168.0]
+    Lowest Presentation Distance: [ Idx: 8 / Distance: 0.0]
+        Average Content Distance: 12.733333333333333
+   Average Presentation Distance: 13.871428571428572
+           # Content Comparisons: 210
+      # Presentation Comparisons: 210
+       # Not Content Comparisons: 0
+   #Not Presentation Comparisons: 0
+
+
+Number of Errors: 154
+Mathematica:2 - java.lang.NullPointerException
+Latex2MML:9 - java.lang.NullPointerException
+Mathematica:9 - java.lang.NullPointerException
+Mathematica:11 - java.lang.NullPointerException
+Mathematica:23 - java.lang.NullPointerException
+Mathematica:24 - java.lang.NullPointerException
+Mathematica:39 - java.lang.NullPointerException
+Mathematica:40 - java.lang.NullPointerException
+Latex2MML:43 - java.lang.NullPointerException
+Mathematical:49 - java.lang.NullPointerException
+Latex2MML:49 - java.lang.NullPointerException
+Mathematica:49 - java.lang.NullPointerException
+Mathematica:52 - java.lang.NullPointerException
+Latex2MML:53 - java.lang.NullPointerException
+Mathematica:58 - java.lang.NullPointerException
+Mathematica:59 - java.lang.NullPointerException
+MathToWeb:61 - java.lang.NullPointerException
+Mathematical:63 - java.lang.NullPointerException
+Mathematica:63 - java.lang.NullPointerException
+Mathematica:72 - java.lang.NullPointerException
+Mathematica:79 - java.lang.NullPointerException
+Mathematica:82 - java.lang.NullPointerException
+Mathematica:84 - java.lang.NullPointerException
+Mathematica:86 - java.lang.NullPointerException
+Mathematica:90 - java.lang.NullPointerException
+MathToWeb:94 - java.lang.NullPointerException
+Mathematica:95 - java.lang.NullPointerException
+MathToWeb:97 - java.lang.NullPointerException
+MathToWeb:101 - java.lang.NullPointerException
+Mathematica:101 - java.lang.NullPointerException
+Mathoid:104 - java.lang.NullPointerException
+Mathematica:117 - java.lang.NullPointerException
+Mathematical:120 - java.lang.NullPointerException
+Mathoid:120 - java.lang.NullPointerException
+Latex2MML:122 - java.lang.NullPointerException
+Mathematica:124 - java.lang.NullPointerException
+Mathoid:125 - java.lang.NullPointerException
+Mathematical:128 - java.lang.NullPointerException
+Mathoid:130 - java.lang.NullPointerException
+Mathematica:131 - java.lang.NullPointerException
+Mathoid:132 - java.lang.NullPointerException
+Mathoid:133 - java.lang.NullPointerException
+MathToWeb:134 - java.lang.NullPointerException
+Latex2MML:134 - java.lang.NullPointerException
+Mathoid:134 - java.lang.NullPointerException
+Mathematical:135 - java.lang.NullPointerException
+MathToWeb:135 - java.lang.NullPointerException
+Mathoid:135 - java.lang.NullPointerException
+Mathematica:135 - java.lang.NullPointerException
+Mathematical:139 - java.lang.NullPointerException
+Mathematica:154 - java.lang.NullPointerException
+Mathematica:156 - java.lang.NullPointerException
+MathToWeb:157 - java.lang.NullPointerException
+Mathematica:157 - java.lang.NullPointerException
+Mathematica:160 - java.lang.NullPointerException
+Mathematica:162 - java.lang.NullPointerException
+Mathematica:163 - java.lang.NullPointerException
+Mathematica:166 - java.lang.NullPointerException
+Mathematica:167 - java.lang.NullPointerException
+Mathematical:170 - java.lang.NullPointerException
+Mathematica:170 - java.lang.NullPointerException
+Mathoid:172 - java.lang.NullPointerException
+Latex2MML:173 - java.lang.NullPointerException
+Mathoid:173 - java.lang.NullPointerException
+Mathoid:175 - java.lang.NullPointerException
+Mathematica:177 - java.lang.NullPointerException
+MathToWeb:182 - java.lang.NullPointerException
+Latex2MML:182 - java.lang.NullPointerException
+Mathematica:182 - java.lang.NullPointerException
+Mathematica:183 - java.lang.NullPointerException
+Mathoid:186 - java.lang.NullPointerException
+Mathematica:186 - java.lang.NullPointerException
+Mathematica:187 - java.lang.NullPointerException
+Latex2MML:192 - java.lang.NullPointerException
+Mathematica:192 - java.lang.NullPointerException
+MathToWeb:194 - java.lang.NullPointerException
+Mathoid:195 - java.lang.NullPointerException
+Mathoid:197 - java.lang.NullPointerException
+Mathematical:198 - java.lang.NullPointerException
+Latex2MML:198 - java.lang.NullPointerException
+Mathematica:198 - java.lang.NullPointerException
+Mathematical:199 - java.lang.NullPointerException
+Mathematica:199 - java.lang.NullPointerException
+Mathoid:200 - java.lang.NullPointerException
+Mathoid:201 - java.lang.NullPointerException
+Mathematica:202 - java.lang.NullPointerException
+Mathoid:204 - java.lang.NullPointerException
+Mathematica:204 - java.lang.NullPointerException
+Mathoid:205 - java.lang.NullPointerException
+Mathematica:205 - java.lang.NullPointerException
+Mathoid:209 - java.lang.NullPointerException
+Mathematica:209 - java.lang.NullPointerException
+Mathematica:212 - java.lang.NullPointerException
+Mathoid:218 - java.lang.NullPointerException
+Mathematica:218 - java.lang.NullPointerException
+Mathematical:220 - java.lang.NullPointerException
+MathToWeb:220 - java.lang.NullPointerException
+Latex2MML:220 - java.lang.NullPointerException
+Mathoid:220 - java.lang.NullPointerException
+Mathematica:220 - java.lang.NullPointerException
+Mathoid:221 - java.lang.NullPointerException
+Mathematical:222 - java.lang.NullPointerException
+Mathoid:222 - java.lang.NullPointerException
+MathToWeb:225 - java.lang.NullPointerException
+Mathoid:225 - java.lang.NullPointerException
+Mathematica:225 - java.lang.NullPointerException
+Mathoid:226 - java.lang.NullPointerException
+Mathematica:226 - java.lang.NullPointerException
+Mathoid:233 - java.lang.NullPointerException
+Mathematica:233 - java.lang.NullPointerException
+MathToWeb:236 - java.lang.NullPointerException
+Mathoid:238 - java.lang.NullPointerException
+Mathematica:238 - java.lang.NullPointerException
+Mathematical:241 - java.lang.NullPointerException
+Mathoid:241 - java.lang.NullPointerException
+Mathematica:241 - java.lang.NullPointerException
+Mathematica:245 - java.lang.NullPointerException
+Mathoid:247 - java.lang.NullPointerException
+Mathematica:247 - java.lang.NullPointerException
+MathToWeb:248 - java.lang.NullPointerException
+Latex2MML:248 - java.lang.NullPointerException
+Mathoid:248 - java.lang.NullPointerException
+Mathematica:248 - java.lang.NullPointerException
+MathToWeb:251 - java.lang.NullPointerException
+Mathoid:251 - java.lang.NullPointerException
+Mathematica:251 - java.lang.NullPointerException
+MathToWeb:252 - java.lang.NullPointerException
+Latex2MML:252 - java.lang.NullPointerException
+Mathoid:252 - java.lang.NullPointerException
+Mathematica:252 - java.lang.NullPointerException
+MathToWeb:254 - java.lang.NullPointerException
+Mathoid:255 - java.lang.NullPointerException
+Mathematica:255 - java.lang.NullPointerException
+MathToWeb:260 - java.lang.NullPointerException
+Latex2MML:260 - java.lang.NullPointerException
+Mathoid:260 - java.lang.NullPointerException
+Mathematica:260 - java.lang.NullPointerException
+Mathematica:261 - java.lang.NullPointerException
+Mathematical:262 - java.lang.NullPointerException
+MathToWeb:262 - java.lang.NullPointerException
+Mathoid:262 - java.lang.NullPointerException
+Mathematica:262 - java.lang.NullPointerException
+Mathematica:263 - java.lang.NullPointerException
+MathToWeb:264 - java.lang.NullPointerException
+Mathoid:264 - java.lang.NullPointerException
+Mathematica:264 - java.lang.NullPointerException
+Mathematica:265 - java.lang.NullPointerException
+Mathematica:266 - java.lang.NullPointerException
+Mathematica:271 - java.lang.NullPointerException
+Mathoid:276 - java.lang.NullPointerException
+Mathematica:276 - java.lang.NullPointerException
+Mathematica:277 - java.lang.NullPointerException
+Mathematica:278 - java.lang.NullPointerException
+Mathematica:280 - java.lang.NullPointerException
+

@@ -1,0 +1,9 @@
+| name                                                | min |   avg |   max | cnt |
+| :-------------------------------------------------- | --: | ----: | ----: | --: |
+| MathMLString                                        | 465 |  6453 | 55204 | 309 |
+| OptimizedMathMLString                               | 100 |   599 |  4743 | 309 |
+| MathMLStringURIEncoded                              | 727 | 11402 | 99482 | 309 |
+| MathMLStringBase64Encoded                           | 620 |  8626 | 73960 | 309 |
+| zlibCompressedMathMLStringBase64urlEncoded          | 324 |  1397 |  9524 | 309 |
+| zlibCompressedMathMLStringBase64Encoded             | 342 |  1484 | 10122 | 309 |
+| zlibCompressedOptimizedMathMLStringBase64urlEncoded | 128 |   301 |   960 | 309 |

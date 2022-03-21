@@ -1,0 +1,16 @@
+[submodule "lib/MathMLCan"]
+	path = lib/MathMLCan
+	url = https://github.com/TU-Berlin/MathMLCan.git
+	branch = master
+[submodule "lib/RTED"]
+	path = lib/RTED
+	url = https://github.com/TU-Berlin/RTED.git
+	branch = master
+[submodule "lib/GoUldI"]
+	path = lib/GoUldI
+	url = https://github.com/ag-gipp/GoUldI.git
+	branch = master
+[submodule "lib/MathMLTools"]
+	path = lib/MathMLTools
+	url = https://github.com/ag-gipp/MathMLTools.git
+	branch = mathosphere-fix

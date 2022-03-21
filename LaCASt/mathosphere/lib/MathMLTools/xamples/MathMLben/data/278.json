@@ -1,0 +1,37 @@
+{
+  "definitions": {
+    "\\alpha": [
+      {
+        "Q2303886": "index"
+      }
+    ],
+    "\\beta": [
+      {
+        "Q2303886": "index"
+      }
+    ],
+    "F": [
+      "gauge field strength",
+      {
+        "Q20707065": "Field strength"
+      }
+    ]
+  },
+  "constraints": [],
+  "math_inputtex": "F_{\\alpha\\beta},\\bar{F}_{{\\dot{\\alpha}}{\\dot{\\beta}}}",
+  "math_inputtex_semantic": "\\w{Q1076013}{F}_{ \\w{Q2303886}{\\alpha} \\w{Q2303886}{\\beta}}",
+  "correct_tex": "F_{\\alpha\\beta},\\bar{F}_{{\\dot{\\alpha}}{\\dot{\\beta}}}",
+  "correct_mml": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"\n      xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n      alttext=\"F_{\\alpha\\beta}\"\n      class=\"ltx_Math\"\n      display=\"inline\"\n      id=\"p1.1.m1.1\">\n  <semantics id=\"p1.1.m1.1a\">\n      <msub id=\"p1.1.m1.1.3\" xref=\"p1.1.m1.1.3.cmml\">\n         <mi id=\"p1.1.m1.1.1\" xref=\"p1.1.m1.1.1.cmml\">F</mi>\n         <mrow id=\"p1.1.m1.1.2.1\" xref=\"p1.1.m1.1.2.1.cmml\">\n            <mi id=\"p1.1.m1.1.2.1.1\" xref=\"p1.1.m1.1.2.1.1.cmml\">α</mi>\n            <mo id=\"p1.1.m1.1.2.1.3\" xref=\"p1.1.m1.1.2.1.3.cmml\">⁢</mo>\n            <mi id=\"p1.1.m1.1.2.1.2\" xref=\"p1.1.m1.1.2.1.2.cmml\">β</mi>\n         </mrow>\n      </msub>\n      <annotation-xml encoding=\"MathML-Content\" id=\"p1.1.m1.1b\">\n         <apply id=\"p1.1.m1.1.3.cmml\" xref=\"p1.1.m1.1.3\">\n            <ci id=\"p1.1.m1.1.1.cmml\" xref=\"p1.1.m1.1.1\">𝐹</ci>\n            <apply id=\"p1.1.m1.1.2.1.cmml\" xref=\"p1.1.m1.1.2.1\">\n               <times id=\"p1.1.m1.1.2.1.3.cmml\" xref=\"p1.1.m1.1.2.1.3\"/>\n               <ci id=\"p1.1.m1.1.2.1.1.cmml\" xref=\"p1.1.m1.1.2.1.1\">𝛼</ci>\n               <ci id=\"p1.1.m1.1.2.1.2.cmml\" xref=\"p1.1.m1.1.2.1.2\">𝛽</ci>\n            </apply>\n         </apply>\n      </annotation-xml>\n      <annotation encoding=\"application/x-tex\" id=\"p1.1.m1.1c\">F_{\\alpha\\beta}</annotation>\n  </semantics>\n</math>\n",
+  "uri": "https://arxiv.org/abs/hep-th/0110074",
+  "title": "Use of Lagrange multipliers Context 2",
+  "comment": "not sure if field strength is correct. maybe https://en.wikipedia.org/wiki/Field_strength_tensor ?\n\nPhil:  Electromagnetic tensor (Q1076013)",
+  "type": "general formula",
+  "notation": "Van der Waerden notation",
+  "ntcir12-type": "20",
+  "formula": "1_34.10",
+  "page": "11",
+  "ntcir12-relevance": "4",
+  "check": {
+    "tree": false
+  }
+}

@@ -1,0 +1,11 @@
+<math 
+  xmlns="http://www.w3.org/1998/Math/MathML">
+  <semantics>
+    <mrow>
+      <mi>x</mi>
+      <mo>=</mo>
+      <mi>b</mi>
+    </mrow>
+    <annotation encoding="TeX">x=b</annotation>
+  </semantics>
+</math>

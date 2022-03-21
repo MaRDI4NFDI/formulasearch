@@ -1,0 +1,144 @@
+[
+  {
+    "type": "section",
+    "htmlClass": "row",
+    "items": [
+      {
+        "type": "section",
+        "htmlClass": "col",
+        "items": [
+          "title"
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "col",
+        "items": [
+          "type"
+        ]
+      }
+    ]
+  },
+  "math_inputtex",
+  "correct_tex",
+  "uri",
+  {
+    "type": "section",
+    "htmlClass": "row fill-row bottom-alignment",
+    "items": [
+      {
+        "type": "section",
+        "htmlClass": "filling-input",
+        "items": [
+          {
+            "key": "math_inputtex_semantic",
+            "type": "string",
+            "title": "Semantic LaTeX Input"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "bottom-element",
+        "items": [
+          {
+            "type": "button",
+            "style": "btn-info",
+            "title": "MathML",
+            "onClick": "generateMathML(model.math_inputtex_semantic)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "comment",
+    "type": "textarea",
+    "title": "Comment"
+  },
+  {
+    "type": "section",
+    "htmlClass": "row",
+    "items": [
+      {
+        "key": "check.tree",
+        "type": "radios",
+        "title": "Tree State",
+        "description": "Whether the MML tree is correct or not.",
+        "htmlClass": "col",
+        "titleMap": [
+          {
+            "value": true,
+            "name": "Looks good!"
+          },
+          {
+            "value": false,
+            "name": "Needs improvements"
+          }
+        ]
+      },
+      {
+        "key": "check.qid",
+        "type": "radios",
+        "title": "QID State",
+        "description": "Whether the QID's are correct or not.",
+        "htmlClass": "col",
+        "titleMap": [
+          {
+            "value": true,
+            "name": "Looks good!"
+          },
+          {
+            "value": false,
+            "name": "Needs improvements"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "htmlClass": "row btn-row center",
+    "items": [
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          {
+            "type": "button",
+            "style": "btn-info btn-arrow-left",
+            "title": "-- ID",
+            "onClick": "previousID(model)"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          {
+            "type": "submit",
+            "style": "btn-warning",
+            "title": "Push"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "htmlClass": "col btn-center",
+        "items": [
+          {
+            "type": "button",
+            "style": "btn-info btn-arrow-right",
+            "title": "ID ++",
+            "onClick": "nextID(model)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "qID",
+    "onChange": "setID()"
+  }
+]

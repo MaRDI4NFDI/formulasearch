@@ -1,0 +1,7 @@
+[submodule "LaCASt"]
+	path = LaCASt
+	url = git@github.com:ag-gipp/LaCASt.git
+	branch = wikipedia
+[submodule "formula-cloud-server"]
+	path = formula-cloud-server
+	url = git@github.com:ag-gipp/formula-cloud-server.git

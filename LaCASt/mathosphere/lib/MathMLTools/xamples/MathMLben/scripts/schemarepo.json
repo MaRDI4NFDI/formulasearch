@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "title": "Types",
+  "properties": {
+    "owner": {
+      "title": "Repository Owner",
+      "type": "string",
+      "default":"physikerwelt"
+    },
+    "repo": {
+      "title": "Repository Name",
+      "type": "string",
+      "default":"tmptest"
+    },
+    "foldername": {
+      "title": "Folder Name",
+      "type":"string",
+      "default": "data/"
+    },
+    "token": {
+      "title": "Access Token for GitHub",
+      "type":"string",
+      "default": ""
+    }
+  },
+  "required": [
+    "owner","repo","foldername"
+  ]
+}
