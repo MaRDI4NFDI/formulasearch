@@ -18,7 +18,6 @@ import gov.nist.drmf.interpreter.generic.SemanticEnhancedDocumentBuilder;
 import gov.nist.drmf.interpreter.generic.mlp.pojo.MOIPresentations;
 import gov.nist.drmf.interpreter.generic.mlp.pojo.SemanticEnhancedDocument;
 import gov.nist.drmf.interpreter.pom.extensions.PrintablePomTaggedExpression;
-import gov.nist.drmf.interpreter.pom.generic.GenericReplacementTool;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
