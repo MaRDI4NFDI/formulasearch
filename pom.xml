@@ -6,8 +6,9 @@
 
     <groupId>com.formulasearchengine</groupId>
     <artifactId>vmext-demo</artifactId>
-    <packaging>pom</packaging>
     <version>1.0</version>
+    <packaging>pom</packaging>
+
 
     <!-- sub modules -->
     <modules>
@@ -212,17 +213,57 @@
 
     <build>
         <plugins>
-            <!-- allows to package executable jar -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>target/vmext-demo-${project.version}.jar</file>
+                                    <type>jar</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-                <configuration>
-                    <finalName>mathpipeline</finalName>
-                    <layout>JAR</layout>
-                    <mainClass>org.citeplag.ApplicationStart</mainClass>
-                </configuration>
+                <version>2.3.0.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+            <!-- allows to package executable jar -->
+
             <!-- code coverage -->
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
