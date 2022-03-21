@@ -68,7 +68,9 @@ public class BaseXController {
     @ApiOperation(value = "Run MWS query on BaseX")
     public MathRequest mwsProcessing(@RequestBody String data, HttpServletRequest request) {
         String query = extractQueryFromData(data);
-        if(query==null){ return null; }
+        if (query == null) {
+            return null;
+        }
         return process(query, "mws", request);
     }
 
@@ -78,7 +80,7 @@ public class BaseXController {
      * @param data url encoded string which container query as json.
      * @return query as string or data
      */
-    private String extractQueryFromData(String data){
+    private String extractQueryFromData(String data) {
         String query = null;
         try {
             String result = java.net.URLDecoder.decode(data, StandardCharsets.UTF_8.name());
@@ -137,8 +139,8 @@ public class BaseXController {
      * If the given string is null or empty, or the string cannot be parsed
      * it will return an empty array.
      *
-     * @param integerArray
-     * @return
+     * @param integerArray array which is parsed
+     * @return integer array with content
      */
     private Integer[] parseArray(String integerArray) throws NumberFormatException {
         if (integerArray == null || integerArray.isEmpty()) {
