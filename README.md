@@ -5,7 +5,7 @@ This is initially based on: https://github.com/ag-gipp/vmext-demo/tree/fix_endpo
 
 ## Note for Checkstyle 
 In IntelliJ IDEA: Install Checkstyle IDEA Plugin, In checkstyle settings load the checkstyle.xml-file, 
-set checkstyle version =~8.34 to enable compatibility.
+set checkstyle version =~8.29 to ensure compatibility.
 
 ================================================================
 
