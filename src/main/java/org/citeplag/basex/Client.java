@@ -2,12 +2,7 @@ package org.citeplag.basex;
 
 import com.formulasearchengine.mathmlquerygenerator.NtcirPattern;
 import com.formulasearchengine.mathmlquerygenerator.QVarXQueryGenerator;
-import com.formulasearchengine.mathmlquerygenerator.XQueryGenerator;
 import com.formulasearchengine.mathmltools.xmlhelper.XMLHelper;
-import org.citeplag.basex.BaseXClient;
-import org.citeplag.basex.Benchmark;
-import org.citeplag.basex.Server;
-import org.citeplag.basex.TexQueryGenerator;
 import org.citeplag.basex.types.Hit;
 import org.citeplag.basex.types.Result;
 import org.citeplag.basex.types.Results;
@@ -44,12 +39,11 @@ public class Client {
 	public static final String PASSWORD = "admin";
 	private static final Pattern CR_PATTERN = Pattern.compile("\r");
 	private Results results = new Results();
-	private Run currentRun = new Run( "baseX" + System.currentTimeMillis(), "automated" );
-	private Result currentResult = new Result( "NTCIR11-Math-" );
+	private Run currentRun = new Run("baseX" + System.currentTimeMillis(), "automated");
+	private Result currentResult = new Result("NTCIR11-Math-");
 	private Long lastQueryDuration;
 	private boolean useXQ = true;
 	private boolean showTime = true;
-
 	/**
 	 * Constructs a new empty Client. Used for running individual queries.
 	 */
@@ -61,9 +55,9 @@ public class Client {
 	 */
 	public Client(List<NtcirPattern> patterns) throws XQException {
 		for (final NtcirPattern pattern : patterns) {
-			processPattern( pattern );
+			processPattern(pattern);
 		}
-		results.addRun( currentRun );
+		results.addRun(currentRun);
 	}
 
 	/**

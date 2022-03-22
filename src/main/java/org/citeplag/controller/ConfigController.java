@@ -23,53 +23,23 @@ public class ConfigController {
     private LaTeXMLRemoteConfig laTeXMLRemoteConfig;
 
     @Autowired
-    private MathASTConfig mathASTConfig;
-
-    @Autowired
     private MathoidConfig mathoidConfig;
 
     @Autowired
-    private CASTranslatorConfig translatorConfig;
-
-    @Autowired
     private BaseXConfig baseXConfig;
-
-    @Autowired
-    private FormulaCloudServerConfig formulaCloudServerConfig;
-
     @GetMapping("mathoid")
     @ApiOperation(value = "Show the current default LaTeXML configuration")
     public MathoidConfig getMathoidConfig(HttpServletRequest request) throws Exception {
         return mathoidConfig;
     }
-
     @GetMapping("latexml")
     @ApiOperation(value = "Show the current default LaTeXML configuration")
     public LaTeXMLConfig getLaTeXMLConfig(HttpServletRequest request) throws Exception {
         return laTeXMLRemoteConfig;
     }
-
-    @GetMapping("mast")
-    @ApiOperation(value = "Get the Math AST ")
-    public String getMathUrl() throws Exception {
-        return mathASTConfig.getUrl();
-    }
-
-    @GetMapping("translator")
-    @ApiOperation(value = "Show the translator configuration")
-    public CASTranslatorConfig getTranslatorConfig(HttpServletRequest request) {
-        return translatorConfig;
-    }
-
     @GetMapping("basex")
     @ApiOperation(value = "Show the BaseX server configuration")
     public BaseXConfig getBaseXConfig(HttpServletRequest request) {
         return baseXConfig;
-    }
-
-    @GetMapping("formulacloud")
-    @ApiOperation(value = "Show the Formulacloud server configuration")
-    public FormulaCloudServerConfig getFormulaCloudServerConfig(HttpServletRequest request) {
-        return formulaCloudServerConfig;
     }
 }

@@ -16,7 +16,7 @@ public class GenericLatexTranslatorConfig extends GenericLacastConfig {
 
     public GenericLatexTranslatorConfig(GenericLacastConfig reference) {
         super(reference);
-        this.setMapleSubprocessInfo(new SpringMapleSubprocessInfo());
+        this.setMapleSubprocessInfo(null);
     }
 
     public static GenericLatexTranslatorConfig getDefaultConfig() {

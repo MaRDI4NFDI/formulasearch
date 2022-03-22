@@ -14,16 +14,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class Server {
 	private static Server serverInstance;
-	public BaseXServer baseXServer;
+	private BaseXServer baseXServer;
 	public static final String SERVER_NAME = "localhost";
 	public static final int PORT = 1984;
 	public static final String DATABASE_NAME = "math";
-	private static final Logger log = LogManager.getLogger(Server.class.getName());
+	private static final Logger LOG = LogManager.getLogger(Server.class.getName());
 
 
 	private Server() {
 	}
-
 	/**
 	 * @return The only instance of Server.
 	 */
@@ -45,7 +44,6 @@ public final class Server {
 	 */
 	public void startup(@NotNull File input) throws IOException {
 		shutdown();
-		
 		/* [CG] If a client is used (as I initially) proposed, the database will get lost
      * once the client connection is closed. So we’ll have (at least) 2 options here:
      *
@@ -55,13 +53,13 @@ public final class Server {
 		 * I went for the second option... */
 
 		// "-d" for debug
-		baseXServer = new BaseXServer( "-p" + PORT, "-n" + SERVER_NAME,
+		baseXServer = new BaseXServer("-p" + PORT, "-n" + SERVER_NAME,
 		    "-c " + "set mainmem true\nset intparse on\n create db " + DATABASE_NAME + " " + input.getAbsolutePath());
 
 		/* [CG] I dropped all health checks. If something should be going wrong here, please give me a note;
 		 * it should definitely be fixed! */
 
-		log.info("Import completed.");
+		LOG.info("Import completed.");
 	}
 
 	/**
