@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<math type="pom-exported">
-  <expression prime-tag="sequence">
-    <term prime-tag="letter" secondary-tags="Latin">F</term>
-    <term prime-tag="equals">=</term>
-    <term prime-tag="letter" secondary-tags="Latin">m</term>
-    <term prime-tag="letter" secondary-tags="Latin">a</term>
-  </expression>
-</math>

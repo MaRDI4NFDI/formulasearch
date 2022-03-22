@@ -1,1 +1,0 @@
-exception expected in the current implementation
