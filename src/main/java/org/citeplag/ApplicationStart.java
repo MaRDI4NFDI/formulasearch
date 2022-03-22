@@ -2,8 +2,6 @@ package org.citeplag;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Predicate;
-import org.citeplag.beans.SearchResultResponse;
-import org.citeplag.converter.SearchResultResponseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -53,11 +50,6 @@ public class ApplicationStart {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
         builder.indentOutput(true);
         return builder;
-    }
-
-    @Bean("SearchResultResponseConverter")
-    public HttpMessageConverter<SearchResultResponse> stringHttpMessageConverter() {
-        return new SearchResultResponseConverter();
     }
 
     @Bean

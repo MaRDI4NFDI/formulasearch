@@ -22,16 +22,10 @@ public class ConfigController {
     @Autowired
     private LaTeXMLRemoteConfig laTeXMLRemoteConfig;
 
-    @Autowired
-    private MathoidConfig mathoidConfig;
 
     @Autowired
     private BaseXConfig baseXConfig;
-    @GetMapping("mathoid")
-    @ApiOperation(value = "Show the current default LaTeXML configuration")
-    public MathoidConfig getMathoidConfig(HttpServletRequest request) throws Exception {
-        return mathoidConfig;
-    }
+
     @GetMapping("latexml")
     @ApiOperation(value = "Show the current default LaTeXML configuration")
     public LaTeXMLConfig getLaTeXMLConfig(HttpServletRequest request) throws Exception {
