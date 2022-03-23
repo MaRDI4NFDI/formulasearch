@@ -2,12 +2,12 @@ FROM openjdk:11
 
 EXPOSE 8080
 
-COPY vmext-demo-1.0.jar mathpipeline.jar
+COPY /home/runner/work/formulasearch/formulasearch/target/vmext-demo-1.0.jar mathpipeline.jar
 COPY application.yaml application.yaml
-COPY lacast.config.yaml lacast.config.yaml
+# COPY lacast.config.yaml lacast.config.yaml
 COPY sampleHarvest.xml basex/sampleHarvest.xml
 
-COPY /LaCASt/ /LaCASt/
+# COPY /LaCASt/ /LaCASt/
 
 RUN apt update && apt install -y curl avahi-daemon wget sshpass sudo locales locales-all ssh vim expect libfontconfig1 libgl1-mesa-glx libasound2
 
