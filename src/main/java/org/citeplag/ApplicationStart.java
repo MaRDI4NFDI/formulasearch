@@ -102,10 +102,10 @@ public class ApplicationStart {
      */
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("MathML Demo (VMEXT) - An Endpoint for LaTeX and MathML Computations & Visualizations")
-                .description("A SciPlore & LaCASt Project")
+                .title("Formulasearch - A REST-Endpoint for Searching Formulae based on VMEXT-Demo")
+                .description("Spring based REST API")
                 .termsOfServiceUrl("http://springfox.io")
-                .contact(new Contact("Vincent Stange", null, "vinc.sohn at gmail.com"))
+                .contact(new Contact("MaRDI@NFDI TA5", "https://github.com/MaRDI4NFDI", "ta5 at mardi4nfdi.de "))
                 .license("Apache License Version 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
                 .version("2.0")

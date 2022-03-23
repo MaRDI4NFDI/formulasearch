@@ -27,7 +27,7 @@ translator:
   jarPath: "LaCASt/bin/latex-to-cas-translator.jar"
 
 basexserver:
-  harvestPath: "sampleHarvest.xml"
+  harvestPath: "my_harvests/"
 
 # -db /opt/zbmath/empty-dump/ -tfidf /opt/zbmath/tfidf/ -index zbmath -esMaxHits 200 -minDF 25 -maxDF 50000
 formulacloud:
