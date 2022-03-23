@@ -44,12 +44,6 @@ jobs:
         name: Build package with Maven
         run: mvn --batch-mode package --file pom.xml
       -
-        name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: vmext-demo-1.0.jar
-          path: target/vmext-demo-1.0.jar
-      -
         name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
