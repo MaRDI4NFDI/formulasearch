@@ -1,6 +1,7 @@
 server:
 #  servlet-path: /pipe   # custom servlet-path
   port: 1985            # default server port, if not set otherwise
+  enable_rest_insertions: false # only if true enable endpoints which have put methods deletions insertions etc.
 
 # Math AST Renderer - Main URL
 mast.url: https://vmext.wmflabs.org/

@@ -11,8 +11,10 @@ import org.citeplag.domain.MathRequest;
 import org.citeplag.domain.MathUpdate;
 import org.citeplag.beans.BaseXGenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +37,9 @@ public class BaseXController {
     // the final BaseX server
     private static final Server BASEX_SERVER = Server.getInstance();
     private static boolean serverRunning = false;
+
+    @Value("${server.enable_rest_insertions}")
+    private boolean enableRestInsertions;
 
     @Autowired
     private BaseXConfig baseXConfig;
@@ -112,6 +117,12 @@ public class BaseXController {
                     String integerArray,
             @RequestParam(name = "MML", required = false) String harvest,
             HttpServletRequest request) {
+
+        if (!enableRestInsertions) {
+            // This is a security setting for deployment in prod.
+            return null;
+        }
+
         if (!startServerIfNecessary()) {
             LOG.warn("Return null for request, because BaseX server is not running.");
             return null;
