@@ -3,6 +3,10 @@
 Formulasearch Basex REST endpoint for enabling the formulasearch extension in mediawiki.
 This is initially based on: https://github.com/ag-gipp/vmext-demo/tree/fix_endpoints_for_formulasearch
 
+## Using env file locally 
+With IntelliJ Idea, download  and install env file plugin: https://plugins.jetbrains.com/plugin/7861-envfile/
+rename template.env to local.env, change to local params and set it in application start in IntelliJ.
+
 ## Note for Checkstyle 
 In IntelliJ IDEA: Install Checkstyle IDEA Plugin, In checkstyle settings load the checkstyle.xml-file, 
 set checkstyle version =~8.29 to ensure compatibility.

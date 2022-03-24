@@ -22,3 +22,6 @@ Avatar
 
 # Log files
 *.log
+
+# env file
+local.env

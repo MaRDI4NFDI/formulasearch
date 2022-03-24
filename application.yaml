@@ -1,7 +1,7 @@
 server:
 #  servlet-path: /pipe   # custom servlet-path
-  port: 1985            # default server port, if not set otherwise
-  enable_rest_insertions: false # only if true enable endpoints which have put methods deletions insertions etc.
+  port: ${SERVER_PORT}            # default server port, if not set otherwise
+  enable_rest_insertions: ${ENABLE_REST_INSERTIONS}    # only if true enable endpoints which have put methods deletions insertions etc.
 
 # Math AST Renderer - Main URL
 mast.url: https://vmext.wmflabs.org/
@@ -28,7 +28,7 @@ translator:
   jarPath: "LaCASt/bin/latex-to-cas-translator.jar"
 
 basexserver:
-  harvestPath: "my_harvests/"
+  harvestPath: ${HARVESTS_PATH}
 
 # -db /opt/zbmath/empty-dump/ -tfidf /opt/zbmath/tfidf/ -index zbmath -esMaxHits 200 -minDF 25 -maxDF 50000
 formulacloud:
