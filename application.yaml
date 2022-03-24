@@ -1,6 +1,6 @@
 server:
 #  servlet-path: /pipe   # custom servlet-path
-  port: ${SERVER_PORT}            # default server port, if not set otherwise
+  port: ${FS_SERVER_PORT}            # default server port, if not set otherwise
   enable_rest_insertions: ${ENABLE_REST_INSERTIONS}    # only if true enable endpoints which have put methods deletions insertions etc.
 
 # Math AST Renderer - Main URL
