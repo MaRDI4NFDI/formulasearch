@@ -10,6 +10,7 @@ import org.citeplag.config.BaseXConfig;
 import org.citeplag.domain.MathRequest;
 import org.citeplag.domain.MathUpdate;
 import org.citeplag.beans.BaseXGenericResponse;
+import org.citeplag.util.ChecksumCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -22,7 +23,9 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Imported from a RestX frontend. Originally from mathosphere/restd.
@@ -37,7 +40,9 @@ public class BaseXController {
     // the final BaseX server
     private static final Server BASEX_SERVER = Server.getInstance();
     private static boolean serverRunning = false;
-
+    // Creating checksums for watched folder of harvests.
+    private ChecksumCreator checksumCreator = new ChecksumCreator();
+    private Map<String, String> previousChecksums = null;
     @Value("${server.enable_rest_insertions}")
     private boolean enableRestInsertions;
 
@@ -98,7 +103,7 @@ public class BaseXController {
     }
 
     private MathRequest process(String query, String type, HttpServletRequest request) {
-        if (!startServerIfNecessary()) {
+        if (!startServerIfFolderChanges()) {
             LOG.warn("Return null for request, because BaseX server is not running.");
             return null;
         }
@@ -204,6 +209,10 @@ public class BaseXController {
                     required = true)
                     String harvestPath,
             HttpServletRequest request) {
+        if (!enableRestInsertions) {
+            // This is a security setting for deployment in prod.
+            return null;
+        }
         if (harvestPath == null || harvestPath.isEmpty()) {
             return new BaseXGenericResponse(1, "Empty path! Didn't restart the server.");
         }
@@ -232,17 +241,42 @@ public class BaseXController {
         }
     }
 
-    private boolean startServerIfNecessary() {
-        if (!serverRunning) {
-            LOG.info("Startup basex server with harvest file: " + baseXConfig.getHarvestPath());
-            Path path = Paths.get(baseXConfig.getHarvestPath());
-            try {
-                BASEX_SERVER.startup(path.toFile());
-                serverRunning = true;
-            } catch (IOException e) {
-                LOG.error("Cannot load harvest file to start BaseX server.", e);
+    /**
+     * (Re-)starts the server if the folder contents of harvest files have changed.
+     * This creates a list of checksums for files in harvests dir and compares it to a previously created list.
+     * If the lists differ, the Basex-server is restarted so that the file changes are recognized.
+     * @return boolean if server running
+     */
+    private boolean startServerIfFolderChanges() {
+        try {
+            Map<String, String> newChecksums = checksumCreator.createChecksumsForFolder(baseXConfig.getHarvestPath(),
+                    "SHA-256");
+            if (!checksumCreator.compareChecksums(newChecksums, previousChecksums)) {
+                startServer();
             }
+            previousChecksums = newChecksums;
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("Wrong algorithm specified for harvest.", e);
+        } catch (IOException e) {
+            LOG.error("Cannot load harvest file to start BaseX server.", e);
         }
         return serverRunning;
+    }
+    private boolean startServerIfNecessary() {
+        if (!serverRunning) {
+            startServer();
+        }
+        return serverRunning;
+    }
+
+    private void startServer() {
+        LOG.info("Startup basex server with harvest file: " + baseXConfig.getHarvestPath());
+        Path path = Paths.get(baseXConfig.getHarvestPath());
+        try {
+            BASEX_SERVER.startup(path.toFile());
+            serverRunning = true;
+        } catch (IOException e) {
+            LOG.error("Cannot load harvest file to start BaseX server.", e);
+        }
     }
 }
