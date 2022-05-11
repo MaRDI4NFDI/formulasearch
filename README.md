@@ -1,6 +1,6 @@
 # Formulasearch 
 
-The Formulasearch Basex REST endpoint for enabling the formulasearch extension in mediawiki.
+A Formulasearch Basex REST endpoint for enabling the formulasearch extension in mediawiki.
 This is initially based on: https://github.com/ag-gipp/vmext-demo/tree/fix_endpoints_for_formulasearch
 
 ## Using env file locally 
