@@ -1,5 +1,7 @@
 package org.citeplag.util;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +16,8 @@ import java.util.*;
  * @author Johannes Stegmüller
  */
 public class ChecksumCreator {
+
+    private static final Logger LOG = LogManager.getLogger(ChecksumCreator.class.getName());
 
     /**
      * Create a hashmap of filepaths as keys and corresponding checksums as values
@@ -52,13 +56,17 @@ public class ChecksumCreator {
 
         // get all the files from a directory
         File[] fList = directory.listFiles();
-        resultList.addAll(Arrays.asList(fList));
-        for (File file : fList) {
-            if (file.isFile()) {
-                continue;
-            } else if (file.isDirectory()) {
-                resultList.addAll(listAllFiles(file.getAbsolutePath()));
+        if (fList != null && fList.length > 0) {
+            resultList.addAll(Arrays.asList(fList));
+            for (File file : fList) {
+                if (file.isFile()) {
+                    continue;
+                } else if (file.isDirectory()) {
+                    resultList.addAll(listAllFiles(file.getAbsolutePath()));
+                }
             }
+        } else {
+            LOG.warn("The directory for storing files is empty.");
         }
         return resultList;
     }
