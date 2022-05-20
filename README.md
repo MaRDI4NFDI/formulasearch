@@ -7,6 +7,9 @@ This is initially based on: https://github.com/ag-gipp/vmext-demo/tree/fix_endpo
 With IntelliJ Idea, download  and install env file plugin: https://plugins.jetbrains.com/plugin/7861-envfile/
 rename template.env to local.env, change to local params and set it in application start in IntelliJ.
 
+## local development
+Create a directory in /opt/basex and grant correct access permissions for storing logs and prevent warnings.
+
 ## Note for Checkstyle 
 In IntelliJ IDEA: Install Checkstyle IDEA Plugin, In checkstyle settings load the checkstyle.xml-file, 
 set checkstyle version =~8.29 to ensure compatibility.
