@@ -11,8 +11,10 @@ import org.citeplag.domain.MathRequest;
 import org.citeplag.domain.MathUpdate;
 import org.citeplag.beans.BaseXGenericResponse;
 import org.citeplag.util.ChecksumCreator;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +43,7 @@ public class BaseXController {
     private static final Server BASEX_SERVER = Server.getInstance();
     private static boolean serverRunning = false;
     // Creating checksums for watched folder of harvests.
-    private ChecksumCreator checksumCreator = new ChecksumCreator();
+    private final ChecksumCreator checksumCreator = new ChecksumCreator();
     private Map<String, String> previousChecksums = null;
     @Value("${server.enable_rest_insertions}")
     private boolean enableRestInsertions;
@@ -77,11 +79,33 @@ public class BaseXController {
     @PostMapping("/mwsquery")
     @ApiOperation(value = "Run MWS query on BaseX")
     public MathRequest mwsProcessing(@RequestBody String data, HttpServletRequest request) {
-        String query = extractQueryFromData(data);
+        JSONObject jsonObject = extractJSONFromData(data);
+        if (jsonObject == null) {
+            return null;
+        }
+        String query = processJSONquery(jsonObject);
         if (query == null) {
             return null;
         }
+
         return process(query, "mws", request);
+    }
+
+
+    /**
+     * Processing a json-formatted data object for query.
+     * @param jsonObject object for data which contains query string.
+     * @return parsed query as string.
+     */
+    private String processJSONquery(JSONObject jsonObject) {
+        String query;
+        try {
+            query = jsonObject.get("query").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return query;
     }
 
     /**
@@ -90,16 +114,15 @@ public class BaseXController {
      * @param data url encoded string which container query as json.
      * @return query as string or data
      */
-    private String extractQueryFromData(String data) {
-        String query = null;
+    private JSONObject extractJSONFromData(String data) {
+        JSONObject resultJ = null;
         try {
             String result = java.net.URLDecoder.decode(data, StandardCharsets.UTF_8.name());
-            JSONObject jsonObject = new JSONObject(result);
-            query = jsonObject.get("query").toString();
+            resultJ = new JSONObject(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return query;
+        return resultJ;
     }
 
     private MathRequest process(String query, String type, HttpServletRequest request) {
@@ -114,6 +137,37 @@ public class BaseXController {
     }
 
     @PostMapping("/update")
+    @ApiOperation(value = "Update results via BaseX")
+    public MathUpdate update(@RequestBody String data, HttpServletRequest request) {
+        if (!enableRestInsertions) {
+            // This is a security setting for deployment in prod.
+            return null;
+        }
+
+        JSONObject jsonObject = extractJSONFromData(data);
+        if (jsonObject == null) {
+            return null;
+        }
+        try {
+            String harvest = jsonObject.get("harvest").toString();
+            String delete = jsonObject.get("delete").toString();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+        if (!startServerIfNecessary()) {
+            LOG.warn("Return null for request, because BaseX server is not running.");
+            return null;
+        }
+
+        return null;
+    }
+
+
+
+    @PostMapping("/update_original")
     @ApiOperation(value = "Update results via BaseX")
     public MathUpdate update(
             @RequestParam("Deletions") @ApiParam(
@@ -150,7 +204,7 @@ public class BaseXController {
         return mu.run();
     }
 
-    /**
+     /**
      * Try to parse an integer array given as a string.
      * If the given string is null or empty, or the string cannot be parsed
      * it will return an empty array.
