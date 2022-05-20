@@ -11,7 +11,6 @@ import org.citeplag.domain.MathRequest;
 import org.citeplag.domain.MathUpdate;
 import org.citeplag.beans.BaseXGenericResponse;
 import org.citeplag.util.ChecksumCreator;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -91,6 +90,35 @@ public class BaseXController {
         return process(query, "mws", request);
     }
 
+    /**
+     * Drafted endpoint  for export functionality.
+     * It is possible that this will be not an endpoint in final mardi-portal, but here for dev-purposes.
+     * @param data
+     * @param request
+     * @return
+     */
+    @PostMapping("/export")
+    @ApiOperation(value = "Export BaseX database to file.")
+    public MathRequest exportFromBaseX(@RequestBody String data, HttpServletRequest request) {
+        if (!enableRestInsertions) {
+            // This is a security setting for deployment in prod.
+            return null;
+        }
+
+        JSONObject jsonObject = extractJSONFromData(data);
+        if (jsonObject == null) {
+            return null;
+        }
+        try {
+            String path = jsonObject.get("path").toString();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
+
 
     /**
      * Processing a json-formatted data object for query.
@@ -148,62 +176,30 @@ public class BaseXController {
         if (jsonObject == null) {
             return null;
         }
+        // Parsing the input-paramters.
+        String harvest;
+        String secureHarvest;
+        Integer[] delete;
         try {
-            String harvest = jsonObject.get("harvest").toString();
-            String delete = jsonObject.get("delete").toString();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-
-
-        if (!startServerIfNecessary()) {
-            LOG.warn("Return null for request, because BaseX server is not running.");
+            harvest = jsonObject.get("harvest").toString();
+            // replace null by empty string to avoid null pointers.
+            secureHarvest = harvest == null ? "" : harvest;
+            delete = parseArray(jsonObject.get("delete").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
-
-        return null;
-    }
-
-
-
-    @PostMapping("/update_original")
-    @ApiOperation(value = "Update results via BaseX")
-    public MathUpdate update(
-            @RequestParam("Deletions") @ApiParam(
-                    name = "Deletions",
-                    value = "List of integers. Separate integers by ','!")
-                    String integerArray,
-            @RequestParam(name = "MML", required = false) String harvest,
-            HttpServletRequest request) {
-
-        if (!enableRestInsertions) {
-            // This is a security setting for deployment in prod.
-            return null;
-        }
-
+        // Starting Base-X.
         if (!startServerIfNecessary()) {
             LOG.warn("Return null for request, because BaseX server is not running.");
             return null;
         }
         LOG.info("Request updating given math from: " + request.getRemoteAddr());
 
-        Integer[] delete;
-
-        try {
-            delete = parseArray(integerArray);
-        } catch (NumberFormatException e) {
-            LOG.error("Cannot parse list of integers!", e);
-            return null;
-        }
-
-        // replace null by empty string to avoid null pointers
-        String secureHarvest = harvest == null ? "" : harvest;
-
+        // Updating the harvest.
         MathUpdate mu = new MathUpdate(delete, secureHarvest);
         return mu.run();
     }
-
      /**
      * Try to parse an integer array given as a string.
      * If the given string is null or empty, or the string cannot be parsed
@@ -217,7 +213,7 @@ public class BaseXController {
             return new Integer[0];
         }
 
-        String cleaned = integerArray.replaceAll(" ", "");
+        String cleaned = integerArray.replaceAll("\\[|\\]|\\s", "");
         String[] elements = cleaned.split(",");
         Integer[] delete = new Integer[elements.length];
         for (int i = 0; i < elements.length; i++) {
