@@ -47,8 +47,8 @@ public class Client {
 	/**
 	 * Constructs a new empty Client. Used for running individual queries.
 	 */
-	public Client() {}
-
+	public Client() {
+	}
 	/**
 	 * Constructs a new Client with the given queryset. This constructor will also search all queries immediately.
 	 * @param patterns List of NtcirPattern
@@ -63,44 +63,43 @@ public class Client {
 	/**
 	 * @return Returns given Result as XML string, and shows time based on showTime
 	 */
-	public static String resultToXML( Result result ) {
+	public static String resultToXML(Result result) {
 		//Use custom coder to disable underscore escaping so run_type is properly printed
-		final XStream stream = new XStream( new Xpp3Driver( new XmlFriendlyNameCoder( "_-", "_" ) ) );
-		if ( !result.getShowTime() ) {
-			stream.omitField( Result.class, "ms" );
+		final XStream stream = new XStream(new Xpp3Driver(new XmlFriendlyNameCoder("_-", "_")));
+		if (!result.getShowTime()) {
+			stream.omitField(Result.class, "ms");
 		}
-		stream.processAnnotations( Result.class );
-		return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + stream.toXML( result );
+		stream.processAnnotations(Result.class);
+		return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + stream.toXML(result);
 	}
 
 	/**
 	 * @return Returns given Results as XML string, and shows time based on showTime
 	 */
-	public static String resultsToXML( Results results ) {
+	public static String resultsToXML(Results results) {
 		//Use custom coder to disable underscore escaping so run_type is properly printed
-		final XStream stream = new XStream(new Xpp3Driver( new XmlFriendlyNameCoder( "_-", "_" ) ) );
-		if ( !results.getShowTime() ) {
-			stream.omitField( Run.class, "ms" );
-			stream.omitField( Result.class, "ms" );
+		final XStream stream = new XStream(new Xpp3Driver(new XmlFriendlyNameCoder("_-", "_")));
+		if (!results.getShowTime()) {
+			stream.omitField(Run.class, "ms");
+			stream.omitField(Result.class, "ms");
 		}
-		stream.processAnnotations( Results.class );
-		return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + stream.toXML( results );
+		stream.processAnnotations(Results.class);
+		return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + stream.toXML(results);
 	}
-
 	/**
 	 * @return the given XML string as an object of the given class. note that this method disables
 	 * underscore as an escape character if the class is Results so the attribute "run_type" is printed correctly.
 	 */
-	public static Object xmlToClass( String xml, Class convertClass ) {
+	public static Object xmlToClass(String xml, Class convertClass) {
 		final XStream stream;
-		if ( convertClass.equals( Results.class )) {
+		if (convertClass.equals(Results.class)) {
 			//Use custom coder to disable underscore escaping so run_type is properly printed
-			stream = new XStream( new Xpp3Driver( new XmlFriendlyNameCoder( "_-", "_" ) ) );
+			stream = new XStream(new Xpp3Driver(new XmlFriendlyNameCoder("_-", "_")));
 		} else {
 			stream = new XStream();
 		}
-		stream.processAnnotations( convertClass );
-		return stream.fromXML( xml );
+		stream.processAnnotations(convertClass);
+		return stream.fromXML(xml);
 	}
 
 	private static XQConnection getXqConnection() throws XQException {
@@ -117,7 +116,7 @@ public class Client {
 	}
 
 	//Alternative API that enables XQuery v3.1
-	private static BaseXClient getBaseXClient() throws IOException {
+	public static BaseXClient getBaseXClient() throws IOException {
 		final Server srv = Server.getInstance();
 		final BaseXClient session = new BaseXClient(Server.SERVER_NAME, Server.PORT, USER, PASSWORD);
 		session.execute("OPEN " + Server.DATABASE_NAME);
@@ -176,24 +175,23 @@ public class Client {
 	 * Setter for whether or not to show time in results.
 	 * @param showTime Boolean for showing time or not
 	 */
-	public void setShowTime (boolean showTime) {
+	public void setShowTime(boolean showTime) {
 		this.showTime = showTime;
-		results.setShowTime( showTime );
+		results.setShowTime(showTime);
 	}
-
 	/**
 	 * Setter for whether or not to use XQuery expression.
 	 * @param useXQ Boolean for using XQuery expressions.
 	 */
-	public void setUseXQ (boolean useXQ) {
+	public void setUseXQ(boolean useXQ) {
 		this.useXQ = useXQ;
 	}
 
 	private void processPattern(NtcirPattern pattern) throws XQException {
-		currentResult = new Result( pattern.getNum() );
-		currentResult.setShowTime( showTime );
-		basex( pattern.getxQueryExpression() );
-		currentRun.addResult( currentResult );
+		currentResult = new Result(pattern.getNum());
+		currentResult.setShowTime(showTime);
+		basex(pattern.getxQueryExpression());
+		currentRun.addResult(currentResult);
 	}
 
 	/**
@@ -203,7 +201,7 @@ public class Client {
 	 * @return Time it took to run the query.
 	 */
 	public Long basex(String query) throws XQException {
-		runQueryBaseXSimple( query );
+		runQueryBaseXSimple(query);
 		return lastQueryDuration;
 	}
 
@@ -219,48 +217,48 @@ public class Client {
 	 * @throws IOException When the client fails to open properly
 	 * @throws TransformerException When the XML reader/writers fail
 	 */
-	protected Result runQueryNTCIR( String query, String queryID )
+	protected Result runQueryNTCIR(String query, String queryID)
 			throws XQException, XMLStreamException, IOException, TransformerException, java.io.UnsupportedEncodingException {
 		int score = 0;
 		int rank = 1;
-		if ( useXQ ) {
+		if (useXQ) {
 			return null;
 		} else {
 			final BaseXClient session = getBaseXClient();
 			try {
 				lastQueryDuration = System.nanoTime();
-				final BaseXClient.Query querySession = session.query( query );
+				final BaseXClient.Query querySession = session.query(query);
 				lastQueryDuration = System.nanoTime() - lastQueryDuration;
-				currentResult.setTime( lastQueryDuration );
-				currentResult.setShowTime( showTime );
+				currentResult.setTime(lastQueryDuration);
+				currentResult.setShowTime(showTime);
 
-				while ( querySession.more() ) {
+				while (querySession.more()) {
 					final String result = querySession.next();
-					final byte[] byteArray = result.getBytes( "UTF-8" );
-					final ByteArrayInputStream inputStream = new ByteArrayInputStream( byteArray );
-					final XMLEventReader reader = XMLInputFactory.newFactory().createXMLEventReader( inputStream );
+					final byte[] byteArray = result.getBytes("UTF-8");
+					final ByteArrayInputStream inputStream = new ByteArrayInputStream(byteArray);
+					final XMLEventReader reader = XMLInputFactory.newFactory().createXMLEventReader(inputStream);
 					final StringWriter hitWriter = new StringWriter();
-					final XMLEventWriter writer = XMLOutputFactory.newInstance().createXMLEventWriter( hitWriter );
+					final XMLEventWriter writer = XMLOutputFactory.newInstance().createXMLEventWriter(hitWriter);
 
-					while ( reader.hasNext() ) {
+					while (reader.hasNext()) {
 						final XMLEvent curEvent = reader.nextEvent();
-						switch ( curEvent.getEventType() ) {
+						switch (curEvent.getEventType()) {
 							case XMLStreamConstants.START_ELEMENT:
-								if ( "formula".equals( curEvent.asStartElement().getName().getLocalPart() ) ) {
-									writer.add( replaceAttr( curEvent.asStartElement(), "for", queryID ) );
+								if ("formula".equals(curEvent.asStartElement().getName().getLocalPart())) {
+									writer.add(replaceAttr(curEvent.asStartElement(), "for", queryID));
 								} else {
-									writer.add( curEvent );
+									writer.add(curEvent);
 								}
 								break;
 							case XMLStreamConstants.START_DOCUMENT:
 								//do nothing
 								break;
 							default:
-								writer.add( curEvent );
+								writer.add(curEvent);
 								break;
 						}
 					}
-					currentResult.addHit( (Hit) xmlToClass( hitWriter.toString(), Hit.class ) );
+					currentResult.addHit((Hit) xmlToClass(hitWriter.toString(), Hit.class));
 				}
 			} finally {
 				session.close();
@@ -277,21 +275,21 @@ public class Client {
 	 * @throws XQException When getXqConnection() fails to connect to the BaseX server, XQJ fails to process the query,
 	 * or XQJ fails to execute the query.
 	 */
-	protected int runQueryBaseXSimple( String query ) throws XQException {
+	protected int runQueryBaseXSimple(String query) throws XQException {
 		int score = 10;
 		int rank = 1;
-		if ( useXQ ) {
+		if (useXQ) {
 			final XQConnection conn = getXqConnection();
 			try {
-				final XQPreparedExpression xqpe = conn.prepareExpression( query );
+				final XQPreparedExpression xqpe = conn.prepareExpression(query);
 				lastQueryDuration = System.nanoTime();
 				final XQResultSequence rs = xqpe.executeQuery();
 				lastQueryDuration = System.nanoTime() - lastQueryDuration;
-				currentResult.setTime( lastQueryDuration );
-				currentResult.setShowTime( showTime );
-				while ( rs.next() ) {
-					final String result = rs.getItemAsString( null );
-					currentResult.addHit( new Hit( CR_PATTERN.matcher( result ).replaceAll( "" ), "", score, rank ) );
+				currentResult.setTime(lastQueryDuration);
+				currentResult.setShowTime(showTime);
+				while (rs.next()) {
+					final String result = rs.getItemAsString(null);
+					currentResult.addHit(new Hit(CR_PATTERN.matcher(result).replaceAll(""),  "", score, rank));
 					rank++;
 				}
 			} finally {
@@ -315,9 +313,8 @@ public class Client {
 				rank++;
 			}*/
 		}
-		return rank-1;
+		return rank - 1;
 	}
-
 	/**
 	 * Calls {@link #runQueryBaseXSimple(String)} and wraps the result with the NTCIR XML format.
 	 * This adds the result to {@link #currentResult}
@@ -325,17 +322,17 @@ public class Client {
 	 * @throws XQException when the server xq connection fails
 	 * @return NTCIR XML formatted result
 	 */
-	public Results runQueryNtcirWrap( String query ) throws XQException {
-		currentResult = new Result( "NTCIR11-Math-");
-		currentResult.setShowTime( showTime );
-		runQueryBaseXSimple( query );
+	public Results runQueryNtcirWrap(String query) throws XQException {
+		currentResult = new Result("NTCIR11-Math-");
+		currentResult.setShowTime(showTime);
+		runQueryBaseXSimple(query);
 		final Results resultsFrame = new Results();
-		resultsFrame.setShowTime( showTime );
-		if ( currentResult.getNumHits() != 0 ) {
-			final Run run = new Run( "", "" );
-			run.setShowTime( showTime );
-			run.addResult( currentResult );
-			resultsFrame.addRun( run );
+		resultsFrame.setShowTime(showTime);
+		if (currentResult.getNumHits() != 0) {
+			final Run run = new Run("", "");
+			run.setShowTime(showTime);
+			run.addResult(currentResult);
+			resultsFrame.addRun(run);
 		}
 		return resultsFrame;
 	}
@@ -346,14 +343,14 @@ public class Client {
 	 * @throws XQException when the server xq connection fails
 	 * @return NTCIR XML formatted result
 	 */
-	public Results runMWSQuery( Document mwsQuery ) throws XQException {
-		if ( mwsQuery == null ){
-			throw new IllegalArgumentException( "Got empty MathML document" );
+	public Results runMWSQuery(Document mwsQuery) throws XQException {
+		if (mwsQuery == null) {
+			throw new IllegalArgumentException("Got empty MathML document");
 		}
 		final QVarXQueryGenerator generator = new QVarXQueryGenerator(mwsQuery);
 		generator.setPathToRoot("//*:expr");
-		generator.setReturnFormat(Benchmark.BASEX_FOOTER );
-		generator.setAddQvarMap( false );
+		generator.setReturnFormat(Benchmark.BASEX_FOOTER);
+		generator.setAddQvarMap(false);
 		return runQueryNtcirWrap(generator.toString());
 	}
 
@@ -366,22 +363,21 @@ public class Client {
 	 * @throws IOException when the tex to MathML conversion fails
 	 * @return NTCIR XML formatted result
 	 */
-	public Results runTexQuery( String tex ) throws IOException, XQException {
-		if (tex == null || tex.isEmpty()){
-			throw new IllegalArgumentException( "Got empty TeX query" );
+	public Results runTexQuery(String tex) throws IOException, XQException {
+		if (tex == null || tex.isEmpty()) {
+			throw new IllegalArgumentException("Got empty TeX query");
 		}
 		final TexQueryGenerator t = new TexQueryGenerator();
 		final String mmlString = t.request(tex);
-		final Document doc = XMLHelper.string2Doc( mmlString, true );
-		return runMWSQuery( doc );
+		final Document doc = XMLHelper.string2Doc(mmlString, true);
+		return runMWSQuery(doc);
 	}
-
 	/**
 	 * Returns XQuery expression for matching formulae based on revision number
 	 * @param rev Revision number to match
 	 * @return XQuery expression
 	 */
-	private String getRevFormula( int rev ) {
+	private String getRevFormula(int rev) {
 		return "expr[matches(@url, '" + rev + "#(.*)')]";
 	}
 
@@ -390,10 +386,9 @@ public class Client {
 	 * @param rev Revision number to count
 	 * @return Number of formulae with specified revision number
 	 */
-	public int countRevisionFormula(int rev){
+	public int countRevisionFormula(int rev) {
 		try {
-			return Integer.parseInt( directXQuery( "count(//*:" + getRevFormula( rev ) + ")"
-			) );
+			return Integer.parseInt(directXQuery("count(//*:" + getRevFormula(rev) + ")"));
 		} catch (final XQException e) {
 			e.printStackTrace();
 			return 0;
@@ -404,9 +399,9 @@ public class Client {
 	 * Shortcut call on {@link #directXQuery(String)} to count the total number of formulae
 	 * @return Total number of formulae
 	 */
-	public int countAllFormula(){
+	public int countAllFormula() {
 		try {
-			return Integer.parseInt( directXQuery( "count(./*/*)" ) );
+			return Integer.parseInt(directXQuery("count(./*/*)"));
 		} catch (final XQException e) {
 			e.printStackTrace();
 			return 0;
@@ -418,9 +413,9 @@ public class Client {
 	 * @param rev Revision number
 	 * @return Whether or not this operation succeeded
 	 */
-	public boolean deleteRevisionFormula(int rev){
+	public boolean deleteRevisionFormula(int rev) {
 		try {
-			directXQuery( "delete node //*:"+ getRevFormula( rev ) );
+			directXQuery("delete node //*:" + getRevFormula(rev));
 			return countRevisionFormula(rev) == 0;
 		} catch (XQException e) {
 			e.printStackTrace();
@@ -435,20 +430,23 @@ public class Client {
 	 */
 	public boolean updateFormula(Node n) {
 		try {
-			@Language("XQuery") final String xUpdate = "declare namespace mws=\"http://search.mathweb.org/ns\";\n" +
-					"declare variable $input external;\n" +
-					"for $e in $input/mws:expr\n" +
+			@Language("XQuery") final String xUpdate = "declare namespace mws=\"http://search.mathweb.org/ns\";\n"
+					+
+					"declare variable $input external;\n"
+					+
+					"for $e in $input/mws:expr\n"
+					+
 					"return ( delete node //*[@url=$e/@url], insert node $e into /mws:harvest[1])";
 			final XQConnection conn = getXqConnection();
 			try {
-				final XQPreparedExpression xqpe = conn.prepareExpression( xUpdate );
-				xqpe.bindNode( new QName( "input" ), n, null );
+				final XQPreparedExpression xqpe = conn.prepareExpression(xUpdate);
+				xqpe.bindNode(new QName("input"), n, null);
 				xqpe.executeQuery();
 			} finally {
 				conn.close();
 			}
 			return true;
-		} catch (final XQException e ) {
+		} catch (final XQException e) {
 			e.printStackTrace();
 			return false;
 		}
