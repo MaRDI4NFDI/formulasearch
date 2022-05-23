@@ -1,5 +1,6 @@
 package org.citeplag.controller;
 
+import org.citeplag.basex.BaseXClient;
 import org.citeplag.basex.Client;
 import org.citeplag.basex.Server;
 import io.swagger.annotations.ApiOperation;
@@ -98,8 +99,8 @@ public class BaseXController {
      * @return
      */
     @PostMapping("/export")
-    @ApiOperation(value = "Export BaseX database to file.")
-    public MathRequest exportFromBaseX(@RequestBody String data, HttpServletRequest request) {
+    @ApiOperation(value = "Export BaseX database to file. Relative and absoulte filepath to export file possible.")
+    public BaseXGenericResponse exportFromBaseX(@RequestBody String data, HttpServletRequest request) {
         if (!enableRestInsertions) {
             // This is a security setting for deployment in prod.
             return null;
@@ -107,17 +108,33 @@ public class BaseXController {
 
         JSONObject jsonObject = extractJSONFromData(data);
         if (jsonObject == null) {
+            return new BaseXGenericResponse(1, "No input data defined");
+        }
+        String path = "";
+        try {
+            path = jsonObject.get("path").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new BaseXGenericResponse(1, "Problem exporting data: " + e.getMessage());
+        }
+
+        // Starting Base-X.
+        if (!startServerIfNecessary()) {
+            LOG.warn("Return null for request, because BaseX server is not running.");
             return null;
         }
-        try {
-            String path = jsonObject.get("path").toString();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        return null;
+        return doExport(path);
     }
 
+    public BaseXGenericResponse doExport(String filepath) {
+        try {
+            BaseXClient baseXClient =  Client.getBaseXClient();
+            baseXClient.execute("EXPORT " + filepath);
+            return new BaseXGenericResponse(0, "Successfully Exported data to: " + filepath);
+        } catch (IOException e) {
+            return new BaseXGenericResponse(1, "Problem exporting data: " + e.getMessage());
+        }
+    }
 
 
     /**

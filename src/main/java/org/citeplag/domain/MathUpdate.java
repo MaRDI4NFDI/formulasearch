@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.formulasearchengine.mathmltools.xmlhelper.XMLHelper;
 import com.formulasearchengine.mathosphere.basex.Client;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
  * Created by Moritz on 14.03.2015.
@@ -53,9 +54,10 @@ public class MathUpdate {
         if (harvest.length() > 0) {
             Document doc = XMLHelper.string2Doc(harvest, true);
             //TODO: validate document
+            Node docelement = doc.getDocumentElement();
             if (doc == null) {
                 this.response = "harvest is not valid XML.";
-            } else if (client.updateFormula(doc.getDocumentElement())) {
+            } else if (client.updateFormula(docelement)) {
                 this.response = "updated";
                 success = true;
             } else {
