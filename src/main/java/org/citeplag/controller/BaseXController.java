@@ -178,7 +178,8 @@ public class BaseXController {
         LOG.info("BaseX processing request from: " + request.getRemoteAddr());
         MathRequest mreq = new MathRequest(query);
         mreq.setType(type);
-        return mreq.run();
+        MathRequest result = mreq.run();
+        return result;
     }
 
     @PostMapping("/update")
@@ -215,7 +216,11 @@ public class BaseXController {
 
         // Updating the harvest.
         MathUpdate mu = new MathUpdate(delete, secureHarvest);
-        return mu.run();
+        MathUpdate res = mu.run();
+
+        // Refresh the stored index files after update (necessary with MAINMEM true basex setting)
+        doExport(baseXConfig.getHarvestPath());
+        return res;
     }
      /**
      * Try to parse an integer array given as a string.
