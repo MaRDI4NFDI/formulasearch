@@ -49,8 +49,9 @@ public final class BaseXClient {
 
     // receive server response
     final String[] response = receive().split(":");
-    final String code, nonce;
-    if(response.length > 1) {
+    final String code;
+    final String nonce;
+    if (response.length > 1) {
 		// support for digest authentication
 		code = username + ':' + response[0] + ':' + password;
 		nonce = response[1];
@@ -64,7 +65,9 @@ public final class BaseXClient {
     send(md5(md5(code) + nonce));
 
     // receive success flag
-    if(!ok()) throw new IOException("Access denied.");
+    if (!ok()) {
+      throw new IOException("Access denied.");
+    }
   }
 
   /**
@@ -78,7 +81,9 @@ public final class BaseXClient {
     send(command);
     receive(in, output);
     info = receive();
-    if(!ok()) throw new IOException(info);
+    if (!ok()) {
+      throw new IOException(info);
+    }
   }
 
   /**
@@ -197,14 +202,14 @@ public final class BaseXClient {
    * @param output output stream
    * @throws IOException I/O exception
    */
+  @SuppressWarnings("checkstyle:InnerAssignment")
   private static void receive(final InputStream input, final OutputStream output)
       throws IOException {
-    for(int b; (b = input.read()) > 0;) {
+    for (int b; (b = input.read()) > 0;) {
 		// read next byte if 0xFF is received
-		output.write( b == 0xFF ? input.read() : b );
+		output.write(b == 0xFF ? input.read() : b);
 	}
   }
-
   /**
    * Sends a command, argument, and input.
    * @param code command code
@@ -223,18 +228,23 @@ public final class BaseXClient {
    * @param input xml input
    * @throws IOException I/O exception
    */
+  @SuppressWarnings({"checkstyle:WhitespaceAround", "checkstyle:InnerAssignment"})
   private void send(final InputStream input) throws IOException {
     final BufferedInputStream bis = new BufferedInputStream(input);
     final BufferedOutputStream bos = new BufferedOutputStream(out);
-    for(int b; (b = bis.read()) != -1;) {
+    for (int b; (b =bis.read()) != -1;) {
 		// 0x00 and 0xFF will be prefixed by 0xFF
-		if ( b == 0x00 || b == 0xFF ) bos.write( 0xFF );
-		bos.write( b );
+		if (b == 0x00 || b == 0xFF) {
+          bos.write(0xFF);
+        }
+		bos.write(b);
 	}
     bos.write(0);
     bos.flush();
     info = receive();
-    if(!ok()) throw new IOException(info);
+    if (!ok()){
+      throw new IOException(info);
+    }
   }
 
   /**
@@ -245,14 +255,16 @@ public final class BaseXClient {
   private static String md5(final String pw) {
     final StringBuilder sb = new StringBuilder();
     try {
-		final MessageDigest md = MessageDigest.getInstance( "MD5" );
-		md.update( pw.getBytes() );
-		for ( final byte b : md.digest() ) {
-			final String s = Integer.toHexString( b & 0xFF );
-			if ( s.length() == 1 ) sb.append( '0' );
-			sb.append( s );
+		final MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(pw.getBytes());
+		for (final byte b : md.digest()) {
+			final String s = Integer.toHexString(b & 0xFF);
+			if (s.length() == 1) {
+              sb.append('0');
+            }
+			sb.append(s);
 		}
-	} catch(final NoSuchAlgorithmException ex) {
+	} catch (final NoSuchAlgorithmException ex) {
 		// should not occur
 		ex.printStackTrace();
 	}
@@ -327,20 +339,24 @@ public final class BaseXClient {
      * @throws IOException I/O exception
      */
     public boolean more() throws IOException {
-      if(cache == null) {
-		  out.write( 4 );
-		  send( id );
+      if (cache == null) {
+		  out.write(4);
+		  send(id);
 		  cache = new ArrayList<>();
 		  final ByteArrayOutputStream os = new ByteArrayOutputStream();
-		  while ( in.read() > 0 ) {
-			  receive( in, os );
-			  cache.add( os.toByteArray() );
+		  while (in.read() > 0) {
+			  receive(in, os);
+			  cache.add(os.toByteArray());
 			  os.reset();
 		  }
-		  if ( !ok() ) throw new IOException( receive() );
+		  if (!ok()) {
+            throw new IOException(receive());
+          }
 		  pos = 0;
 	  }
-      if(pos < cache.size()) return true;
+      if (pos < cache.size()) {
+        return true;
+      }
       cache = null;
       return false;
     }
@@ -400,7 +416,9 @@ public final class BaseXClient {
       out.write(code);
       send(arg);
       final String s = receive();
-      if(!ok()) throw new IOException(receive());
+      if (!ok()) {
+        throw new IOException(receive());
+      }
       return s;
     }
   }
