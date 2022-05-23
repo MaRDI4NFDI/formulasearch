@@ -4,13 +4,8 @@ package org.citeplag.basex.types;
 import com.formulasearchengine.mathosphere.basex.types.Qvar;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,40 +37,36 @@ public class Formula {
 	@XStreamImplicit
 	private List<com.formulasearchengine.mathosphere.basex.types.Qvar> qvars;
 
-	public Formula( String id, String queryFormulaID, String filenameAndFormulaID, Integer score ) {
+	public Formula(String id, String queryFormulaID, String filenameAndFormulaID, Integer score) {
 		this.id = id;
 		this.queryFormulaID = queryFormulaID;
 		this.filename = filenameAndFormulaID;
 		//Null assignment makes attribute disappear
-		this.score = score == null ? null : String.valueOf( score );
+		this.score = score == null ? null : String.valueOf(score);
 		qvars = new ArrayList<>();
 	}
 
-	public void addQvar( com.formulasearchengine.mathosphere.basex.types.Qvar qvar ) {
-		qvars.add( qvar );
+	public void addQvar(Qvar qvar) {
+		qvars.add(qvar);
 	}
-
-	public void setQvars( List<com.formulasearchengine.mathosphere.basex.types.Qvar> qvars ) {
-		this.qvars = new ArrayList<>( qvars );
+	public void setQvars(List<Qvar> qvars) {
+		this.qvars = new ArrayList<>(qvars);
 	}
-
 	public List<Qvar> getQvars() {
-		return new ArrayList<>( qvars );
+		return new ArrayList<>(qvars);
 	}
-
-	public void setScore( Integer score ) {
-		this.score = score == null ? "" : String.valueOf( score );
+	public void setScore(Integer score) {
+		this.score = score == null ? "" : String.valueOf(score);
 	}
-
 	public Integer getScore() {
-		return score != null && score.isEmpty() ? null : Integer.valueOf( score ).intValue();
+		return score != null && score.isEmpty() ? null : Integer.valueOf(score).intValue();
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId( String id ) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -83,7 +74,7 @@ public class Formula {
 		return queryFormulaID;
 	}
 
-	public void setFor( String queryFormulaID ) {
+	public void setFor(String queryFormulaID) {
 		this.queryFormulaID = queryFormulaID;
 	}
 
@@ -91,7 +82,7 @@ public class Formula {
 		return filename;
 	}
 
-	public void setXref( String filename ) {
+	public void setXref(String filename) {
 		this.filename = filename;
 	}
 }

@@ -1,6 +1,5 @@
 package org.citeplag.basex.types;
 
-import org.citeplag.basex.types.Run;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -22,7 +21,7 @@ public class Results {
 
 	@XStreamAlias("xmlns")
 	@XStreamAsAttribute
-	private String xmlns="http://ntcir-math.nii.ac.jp/";
+	private String xmlns = "http://ntcir-math.nii.ac.jp/";
 
 	@XStreamOmitField
 	private boolean showTime = true;
@@ -33,37 +32,34 @@ public class Results {
 		this.xmlns = xmlns;
 	}
 
-	public Results( List<Run> runs ) {
-		this.runs = new ArrayList<Run>( runs );
+	public Results(List<Run> runs) {
+		this.runs = new ArrayList<Run>(runs);
 		this.xmlns = xmlns;
 	}
 
-	public void setShowTime( boolean showTime ) {
+	public void setShowTime(boolean showTime) {
 		this.showTime = showTime;
-		if ( runs != null ) {
-			for ( final Run run : runs ) {
-				run.setShowTime( showTime );
+		if (runs != null) {
+			for (final Run run : runs) {
+				run.setShowTime(showTime);
 			}
 		}
 	}
-
 	public boolean getShowTime() {
 		return this.showTime;
 	}
-
-	public void addRun( Run run ) {
-		run.setShowTime( showTime );
-		this.runs.add( run );
+	public void addRun(Run run) {
+		run.setShowTime(showTime);
+		this.runs.add(run);
 	}
 
-	public void setRuns( List<Run> runs ) {
-		this.runs = new ArrayList<>( runs );
-		for ( final Run run : runs ) {
-			run.setShowTime( showTime );
+	public void setRuns(List<Run> runs) {
+		this.runs = new ArrayList<>(runs);
+		for (final Run run : runs) {
+			run.setShowTime(showTime);
 		}
 	}
-
-	public List<Run> getRuns() {
+	public List <Run> getRuns() {
 		return runs;
 	}
 

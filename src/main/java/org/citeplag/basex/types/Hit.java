@@ -1,6 +1,5 @@
 package org.citeplag.basex.types;
 
-import org.citeplag.basex.types.Formula;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -34,24 +33,22 @@ public class Hit {
 	@XStreamImplicit
 	private List<Formula> formulae;
 
-	public Hit( String id, String filename, Integer score, Integer rank ) {
+	public Hit(String id, String filename, Integer score, Integer rank) {
 		this.id = id;
 		this.filename = filename;
-		this.score = score == null ? "" : String.valueOf( score );
-		this.rank = rank == null ? "" : String.valueOf( rank );
+		this.score = score == null ? "" : String.valueOf(score);
+		this.rank = rank == null ? "" : String.valueOf(rank);
 		this.formulae = new ArrayList<>();
 	}
 
-	public void addFormula( Formula formula ) {
-		formulae.add( formula );
+	public void addFormula(Formula formula) {
+		formulae.add(formula);
 	}
-
-	public void setFormulae( List<Formula> formulae ) {
-		this.formulae = new ArrayList<>( formulae );
+	public void setFormulae(List<Formula> formulae) {
+		this.formulae = new ArrayList<>(formulae);
 	}
 
 	public List<Formula> getFormulae() {
-		return new ArrayList<>( formulae );
+		return new ArrayList<>(formulae);
 	}
-
 }

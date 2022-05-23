@@ -1,6 +1,5 @@
 package org.citeplag.basex.types;
 
-import org.citeplag.basex.types.Hit;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -30,19 +29,19 @@ public class Result {
 	@XStreamOmitField
 	private boolean showTime = true;
 
-	public Result( String queryIDNum, Long ms ) {
-		this.ms = ms == null ? "" : String.valueOf( ms );
+	public Result(String queryIDNum, Long ms) {
+		this.ms = ms == null ? "" : String.valueOf(ms);
 		this.queryID = queryIDNum;
 		this.hits = new ArrayList<>();
 	}
 
-	public Result( String queryIDNum ) {
+	public Result(String queryIDNum) {
 		this.queryID = queryIDNum;
 		this.hits = new ArrayList<>();
 		this.ms = "";
 	}
 
-	public void setShowTime( boolean showTime ) {
+	public void setShowTime(boolean showTime) {
 		this.showTime = showTime;
 	}
 
@@ -51,23 +50,21 @@ public class Result {
 	}
 
 	public Long getTime() {
-		return ms != null && ms.isEmpty() ? null : Long.valueOf( ms );
+		return ms != null && ms.isEmpty() ? null : Long.valueOf(ms);
 	}
 
-	public void setTime( Long ms ) {
-		this.ms = ms == null ? "" : String.valueOf( ms );
+	public void setTime(Long ms) {
+		this.ms = ms == null ? "" : String.valueOf(ms);
+	}
+	public void addHit(Hit hit) {
+		hits.add(hit);
 	}
 
-	public void addHit( Hit hit ) {
-		hits.add( hit );
+	public void setHits(List<Hit> hits) {
+		this.hits = new ArrayList<>(hits);
 	}
-
-	public void setHits( List<Hit> hits ) {
-		this.hits = new ArrayList<>( hits );
-	}
-
 	public List<Hit> getHits() {
-		return new ArrayList<Hit>( hits );
+		return new ArrayList<Hit>(hits);
 	}
 
 	public int getNumHits() {
