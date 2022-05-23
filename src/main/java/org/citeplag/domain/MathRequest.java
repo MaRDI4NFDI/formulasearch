@@ -8,13 +8,11 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.formulasearchengine.mathmltools.xmlhelper.XMLHelper;
-import org.citeplag.basex.BaseXClient;
 import org.citeplag.basex.Client;
 import org.citeplag.basex.types.Results;
 import org.w3c.dom.Document;
 
 import javax.xml.xquery.XQException;
-import java.awt.*;
 import java.io.IOException;
 
 /**
