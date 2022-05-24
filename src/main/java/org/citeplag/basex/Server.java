@@ -53,8 +53,11 @@ public final class Server {
 		 * I went for the second option... */
 
 		// "-d" for debug
-		baseXServer = new BaseXServer("-p" + PORT, "-n" + SERVER_NAME,
-		    "-c " + "set mainmem true\nset intparse on\n create db " + DATABASE_NAME + " " + input.getAbsolutePath());
+		baseXServer = new BaseXServer("-p" + PORT, "-n" + SERVER_NAME, "-c " + "set mainmem true\n" +
+					// "set ADDCACHE true\n" +
+					// "ADD /home/johannes/Repositories/formulasearch/my_cache\n" +
+					"set intparse on\n" +
+					"create db " + DATABASE_NAME + " " + input.getAbsolutePath()+ "_2") ;
 
 		/* [CG] I dropped all health checks. If something should be going wrong here, please give me a note;
 		 * it should definitely be fixed! */

@@ -2,7 +2,8 @@ server:
 #  servlet-path: /pipe   # custom servlet-path
   port: ${FS_SERVER_PORT:1985}            # default server port, if not set otherwise
   enable_rest_insertions: ${ENABLE_REST_INSERTIONS:false}    # only if true enable endpoints which have put methods deletions insertions etc.
-
+  cron_update_formulae: ${CRON_UPDATE_FORMULAE}
+  cron_enabled: ${CRON_ENABLED:false}
 # Math AST Renderer - Main URL
 mast.url: https://vmext.wmflabs.org/
 

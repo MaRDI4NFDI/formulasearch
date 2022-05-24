@@ -2,7 +2,9 @@ package org.citeplag;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Predicate;
+import org.citeplag.components.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
@@ -29,9 +33,11 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @ComponentScan
 @Configuration
 @EnableSwagger2
+@EnableScheduling
 @EnableAutoConfiguration
 public class ApplicationStart {
-
+    @Value("${server.cron_enabled}")
+    private boolean cronEnabled;
     public static void main(String[] args) throws Exception {
         // start the full spring environment
         SpringApplication.run(ApplicationStart.class, args);
@@ -57,6 +63,14 @@ public class ApplicationStart {
         return new MethodValidationPostProcessor();
     }
 
+    @Bean
+    public Scheduler scheduler() {
+        if (this.cronEnabled) {
+            return new Scheduler();
+        } else {
+            return null;
+        }
+    }
     /**
      * SpringFox / Swagger configuration.
      * @return Docket Object from SpringFox / Swagger.
@@ -92,6 +106,10 @@ public class ApplicationStart {
                 regex("/basex.*"),
                 regex("/v1/media.*")
         );
+    }
+    @Scheduled(cron = "*/1 * * * * *")
+    private void minutely() {
+        System.out.println("asd");
     }
 
     /**
