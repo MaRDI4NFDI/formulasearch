@@ -11,6 +11,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 import com.thoughtworks.xstream.io.xml.Xpp3Driver;
 import net.xqj.basex.BaseXXQDataSource;
+import org.citeplag.beans.BaseXGenericResponse;
 import org.intellij.lang.annotations.Language;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -170,7 +171,20 @@ public class Client {
 		results.setShowTime(showTime);
 		return resultsToXML(results);
 	}
-
+	/**
+	 * Calling export functionality and exporting xml from database to specified filepath.
+	 * @param filepath Filepath can be absoulute or relative path
+	 * @return BaseXGeneric response 0 (success) or 1 (failure)
+	 */
+	public static BaseXGenericResponse doExport(String filepath) {
+		try {
+			BaseXClient baseXClient =  Client.getBaseXClient();
+			baseXClient.execute("EXPORT " + filepath);
+			return new BaseXGenericResponse(0, "Successfully Exported data to: " + filepath);
+		} catch (IOException e) {
+			return new BaseXGenericResponse(1, "Problem exporting data: " + e.getMessage());
+		}
+	}
 	/**
 	 * Setter for whether or not to show time in results.
 	 * @param showTime Boolean for showing time or not

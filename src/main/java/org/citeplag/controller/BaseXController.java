@@ -47,7 +47,8 @@ public class BaseXController {
     private Map<String, String> previousChecksums = null;
     @Value("${server.enable_rest_insertions}")
     private boolean enableRestInsertions;
-
+    @Value("${server.always_export}")
+    private boolean alwaysExportXML;
     @Autowired
     private BaseXConfig baseXConfig;
 
@@ -123,20 +124,8 @@ public class BaseXController {
             LOG.warn("Return null for request, because BaseX server is not running.");
             return null;
         }
-        return doExport(path);
+        return Client.doExport(path);
     }
-
-
-    public BaseXGenericResponse doExport(String filepath) {
-        try {
-            BaseXClient baseXClient =  Client.getBaseXClient();
-            baseXClient.execute("EXPORT " + filepath);
-            return new BaseXGenericResponse(0, "Successfully Exported data to: " + filepath);
-        } catch (IOException e) {
-            return new BaseXGenericResponse(1, "Problem exporting data: " + e.getMessage());
-        }
-    }
-
 
     /**
      * Processing a json-formatted data object for query.
@@ -219,8 +208,10 @@ public class BaseXController {
         MathUpdate mu = new MathUpdate(delete, secureHarvest);
         MathUpdate res = mu.run();
 
-        // Refresh the stored index files after update (necessary with MAINMEM true basex setting)
-        doExport(baseXConfig.getHarvestPath());
+        if (alwaysExportXML) {
+            // Refresh the stored index files after update (necessary with MAINMEM true basex setting)
+            Client.doExport(baseXConfig.getHarvestPath());
+        }
         return res;
     }
      /**
@@ -335,7 +326,7 @@ public class BaseXController {
         }
         return serverRunning;
     }
-    private boolean startServerIfNecessary() {
+    public boolean startServerIfNecessary() {
         if (!serverRunning) {
             startServer();
         }

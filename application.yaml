@@ -3,7 +3,8 @@ server:
   port: ${FS_SERVER_PORT:1985}            # default server port, if not set otherwise
   enable_rest_insertions: ${ENABLE_REST_INSERTIONS:false}    # only if true enable endpoints which have put methods deletions insertions etc.
   cron_update_formulae: ${CRON_UPDATE_FORMULAE}
-  cron_enabled: ${CRON_ENABLED:false}
+  cron_enabled: ${CRON_ENABLED:false}               # enable cron-pattern for updating functionality.
+  always_export: ${ALWAYS_EXPORT:false}             # export on every update-rest-api-call, only for debugging.
 # Math AST Renderer - Main URL
 mast.url: https://vmext.wmflabs.org/
 
