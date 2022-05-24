@@ -1,6 +1,5 @@
 package org.citeplag.controller;
 
-import org.citeplag.basex.BaseXClient;
 import org.citeplag.basex.Client;
 import org.citeplag.basex.Server;
 import io.swagger.annotations.ApiOperation;

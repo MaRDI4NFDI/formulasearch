@@ -7,7 +7,6 @@ import org.citeplag.beans.BaseXGenericResponse;
 import org.citeplag.config.BaseXConfig;
 import org.citeplag.controller.BaseXController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
