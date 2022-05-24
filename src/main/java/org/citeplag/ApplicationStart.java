@@ -2,7 +2,13 @@ package org.citeplag;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Predicate;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.citeplag.basex.Client;
+import org.citeplag.beans.BaseXGenericResponse;
 import org.citeplag.components.Scheduler;
+import org.citeplag.config.BaseXConfig;
+import org.citeplag.controller.BaseXController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
@@ -21,6 +26,9 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -38,6 +46,15 @@ import static springfox.documentation.builders.PathSelectors.regex;
 public class ApplicationStart {
     @Value("${server.cron_enabled}")
     private boolean cronEnabled;
+
+    private static final Logger LOG = LogManager.getLogger(Scheduler.class.getName());
+
+    @Autowired
+    private BaseXConfig baseXConfig;
+
+    @Autowired
+    private BaseXController baseXController;
+
     public static void main(String[] args) throws Exception {
         // start the full spring environment
         SpringApplication.run(ApplicationStart.class, args);
@@ -107,10 +124,6 @@ public class ApplicationStart {
                 regex("/v1/media.*")
         );
     }
-    @Scheduled(cron = "*/1 * * * * *")
-    private void minutely() {
-        System.out.println("asd");
-    }
 
     /**
      * General information about our project's API.
@@ -128,5 +141,30 @@ public class ApplicationStart {
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
                 .version("2.0")
                 .build();
+    }
+
+    @PostConstruct
+    public void onStart() {
+        this.baseXController.startServerIfNecessary();
+    }
+    @PreDestroy
+    public void onExit() {
+        try {
+            LOG.info("Make last xml backup before exit.");
+            // Starting Base-X.
+
+            if (!baseXController.startServerIfNecessary()) {
+                LOG.warn("Return null for request, because BaseX server is not running.");
+            }
+            LOG.info("Running the daily xml export of basex for formulaearch");
+            BaseXGenericResponse response = Client.doExport(baseXConfig.getHarvestPath());
+            if (response.getCode() != 0) {
+                LOG.error("Error during daily XML export " + response.getMessage());
+            } else {
+                LOG.info("Running the daily xml export to " + baseXConfig.getHarvestPath() + " was successful");
+            }
+        } catch (Exception ex) {
+            LOG.error("Failed making last xml backup on exit: " + ex.getMessage());
+        }
     }
 }
