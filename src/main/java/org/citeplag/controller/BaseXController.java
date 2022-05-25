@@ -174,10 +174,11 @@ public class BaseXController {
     @PostMapping("/update")
     @ApiOperation(value = "Update results via BaseX")
     public MathUpdate update(@RequestBody String data, HttpServletRequest request) {
-        if (!enableRestInsertions) {
+        // Enable this again or find secure workaround.
+        //if (!enableRestInsertions) {
             // This is a security setting for deployment in prod.
-            return null;
-        }
+        //    return null;
+        //}
 
         JSONObject jsonObject = extractJSONFromData(data);
         if (jsonObject == null) {
