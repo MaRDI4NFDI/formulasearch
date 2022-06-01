@@ -187,12 +187,14 @@ public class BaseXController {
         // Parsing the input-paramters.
         String harvest;
         String secureHarvest;
+        String deletions;
         Integer[] delete;
         try {
             harvest = jsonObject.get("harvest").toString();
             // replace null by empty string to avoid null pointers.
             secureHarvest = harvest == null ? "" : harvest;
-            delete = parseArray(jsonObject.get("delete").toString());
+            deletions = jsonObject.get("delete").toString();
+            delete = parseArray(deletions);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -203,7 +205,8 @@ public class BaseXController {
             return null;
         }
         LOG.info("Request updating given math from: " + request.getRemoteAddr());
-
+        LOG.info("deletions: " + deletions);
+        LOG.info("secureHarvest: " + secureHarvest);
         // Updating the harvest.
         MathUpdate mu = new MathUpdate(delete, secureHarvest);
         MathUpdate res = mu.run();
