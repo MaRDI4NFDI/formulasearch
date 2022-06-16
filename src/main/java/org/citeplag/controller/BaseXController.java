@@ -18,6 +18,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -194,7 +195,11 @@ public class BaseXController {
             // replace null by empty string to avoid null pointers.
             secureHarvest = harvest == null ? "" : harvest;
             deletions = jsonObject.get("delete").toString();
-            delete = parseArray(deletions);
+            if (deletions == null || deletions.equals("")) {
+                delete = new Integer[0];
+            } else {
+                delete = parseArray(deletions);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -338,9 +343,9 @@ public class BaseXController {
 
     private void startServer() {
         LOG.info("Startup basex server with harvest file: " + baseXConfig.getHarvestPath());
-        Path path = Paths.get(baseXConfig.getHarvestPath());
+        //Path path = Paths.get();
         try {
-            BASEX_SERVER.startup(path.toFile());
+            BASEX_SERVER.startup(new File(baseXConfig.getHarvestPath()));
             serverRunning = true;
         } catch (IOException e) {
             LOG.error("Cannot load harvest file to start BaseX server.", e);
