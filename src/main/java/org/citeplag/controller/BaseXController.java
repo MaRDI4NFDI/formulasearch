@@ -182,20 +182,24 @@ public class BaseXController {
         //}
 
         JSONObject jsonObject = extractJSONFromData(data);
-        if (jsonObject == null) {
-            return null;
-        }
+        //if (jsonObject == null) {
+        //    return null;
+        //}
         // Parsing the input-paramters.
-        String harvest;
+        String harvest = null;
         String secureHarvest;
-        String deletions;
+        String deletions = null;
         Integer[] delete;
         try {
-            harvest = jsonObject.get("harvest").toString();
+            if (jsonObject.has("harvest")) {
+                harvest = jsonObject.get("harvest").toString();
+            }
             // replace null by empty string to avoid null pointers.
             secureHarvest = harvest == null ? "" : harvest;
-            deletions = jsonObject.get("delete").toString();
-            if (deletions == null || deletions.equals("")) {
+            if (jsonObject.has("delete")) {
+                deletions = jsonObject.get("delete").toString();
+            }
+            if (deletions == null || deletions.trim().equals("")) {
                 delete = new Integer[0];
             } else {
                 delete = parseArray(deletions);
