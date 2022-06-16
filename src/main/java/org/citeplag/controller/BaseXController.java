@@ -199,7 +199,7 @@ public class BaseXController {
             if (jsonObject.has("delete")) {
                 deletions = jsonObject.get("delete").toString();
             }
-            if (deletions == null || deletions.trim().equals("")) {
+            if (deletions == null || deletions.trim().equals("") || deletions.trim().equals("[]")) {
                 delete = new Integer[0];
             } else {
                 delete = parseArray(deletions);
