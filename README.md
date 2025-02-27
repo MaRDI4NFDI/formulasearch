@@ -1,14 +1,20 @@
 # Formulasearch 
 
-A Formulasearch BaseX REST endpoint for enabling the formulasearch extension in mediawiki.
-This is initially based on: https://github.com/ag-gipp/vmext-demo/tree/fix_endpoints_for_formulasearch
+A Formulasearch BaseX REST endpoint for enabling the formula search extension in MediaWiki.
+This is initially based on https://github.com/ag-gipp/vmext-demo/tree/fix_endpoints_for_formulasearch
 
 ## Using env file locally 
 With IntelliJ Idea, download  and install env file plugin: https://plugins.jetbrains.com/plugin/7861-envfile/
-rename template.env to local.env, change to local params and set it in application start in IntelliJ.
+Rename template.env to local.env, change to local parameters, and set it in the application to start in IntelliJ.
 
 ## local development
 Create a directory in /opt/basex and grant correct access permissions for storing logs and prevent warnings.
+
+## Quickstart
+
+```bash
+docker run -e HARVESTS_PATH=/my_harvests -p 1985:1985 -v ./my_harvests:/my_harvests ghcr.io/mardi4nfdi/formulasearch:main
+```
 
 ## Note for Checkstyle 
 In IntelliJ IDEA: Install Checkstyle IDEA Plugin, In checkstyle settings load the checkstyle.xml-file, 
