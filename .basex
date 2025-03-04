@@ -4,9 +4,9 @@ DBPATH = /opt/basex/data-zbmath/
 LOGPATH = .logs
 REPOPATH = /opt/basex/repo
 LANG = English
-LANGKEYS = false
 FAIRLOCK = false
 CACHETIMEOUT = 3600
+WRITESTORE = true
 
 # Client/Server Architecture
 HOST = localhost
@@ -19,15 +19,18 @@ PROXYHOST =
 PROXYPORT = 0
 NONPROXYHOSTS = 
 IGNORECERT = false
-IGNOREHOSTNAME = false
 TIMEOUT = 30
 KEEPALIVE = 600
 PARALLEL = 8
 LOG = true
+LOGEXCLUDE = 
+LOGCUT = 
 LOGMSGMAXLEN = 1000
+LOGTRACE = true
 
 # HTTP Services
 WEBPATH = /opt/basex/webapp
+GZIP = false
 RESTPATH = 
 RESTXQPATH = 
 PARSERESTXQ = 3

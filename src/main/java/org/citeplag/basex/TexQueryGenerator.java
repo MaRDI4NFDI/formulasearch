@@ -1,29 +1,16 @@
 package org.citeplag.basex;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formulasearchengine.mathmlconverters.latexml.LaTeXMLConverter;
 import com.formulasearchengine.mathmlconverters.latexml.LaTeXMLServiceResponse;
 import com.formulasearchengine.mathmlconverters.latexml.LateXMLConfig;
 import com.google.common.collect.Lists;
-import net.sf.saxon.trans.Err;
-import net.xqj.basex.bin.L;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 public class TexQueryGenerator {
